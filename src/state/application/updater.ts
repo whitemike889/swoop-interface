@@ -7,19 +7,19 @@ import { useDispatch } from 'react-redux'
 import { useActiveHmyReact } from '../../hooks'
 
 export default function Updater(): null {
-  const { chainId, library } = useActiveHmyReact();
+  const { chainId, library } = useActiveHmyReact()
   const dispatch = useDispatch()
 
   const windowVisible = useIsWindowVisible()
 
   const [state, setState] = useState<{ chainId: number | undefined; blockNumber: number | null }>({
     chainId,
-    blockNumber: null
+    blockNumber: null,
   })
 
   const blockNumberCallback = useCallback(
     (blockNumber: number) => {
-      setState(state => {
+      setState((state) => {
         if (chainId === state.chainId) {
           if (typeof state.blockNumber !== 'number') return { chainId, blockNumber }
           return { chainId, blockNumber: Math.max(blockNumber, state.blockNumber) }

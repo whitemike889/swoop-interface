@@ -15,7 +15,7 @@ import { getHarmonyContract } from '../utils'
 
 import { useActiveHmyReact } from './index'
 
-const { ChainID } = require("@harmony-js/utils");
+const { ChainID } = require('@harmony-js/utils')
 
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
@@ -50,13 +50,13 @@ export function useTokenContract(tokenAddress?: string, withSignerIfPossible?: b
 }
 
 export function useWETHContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveHmyReact();
+  const { chainId } = useActiveHmyReact()
   // @ts-ignore
   return useContract(chainId ? WONE[chainId].address : undefined, WETH_ABI, withSignerIfPossible)
 }
 
 export function useENSRegistrarContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveHmyReact();
+  const { chainId } = useActiveHmyReact()
   let address: string | undefined
   if (chainId) {
     switch (chainId) {
@@ -80,12 +80,12 @@ export function usePairContract(pairAddress?: string, withSignerIfPossible?: boo
 }
 
 export function useMulticallContract(): Contract | null {
-  const { chainId } = useActiveHmyReact();
+  const { chainId } = useActiveHmyReact()
   return useContract(chainId && MULTICALL_NETWORKS[chainId], MULTICALL_ABI, false)
 }
 
 export function useSocksController(): Contract | null {
-  const { chainId } = useActiveHmyReact();
+  const { chainId } = useActiveHmyReact()
   return useContract(
     chainId === ChainID.HmyMainnet ? '0x65770b5283117639760beA3F867b69b3697a91dd' : undefined,
     UNISOCKS_ABI,

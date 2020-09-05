@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit'
-import { ChainID } from '@harmony-js/utils';
+import { ChainID } from '@harmony-js/utils'
 
 export interface SerializableTransactionReceipt {
   to: string

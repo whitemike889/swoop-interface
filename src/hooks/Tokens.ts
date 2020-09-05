@@ -11,7 +11,7 @@ import { useBytes32TokenContract, useTokenContract } from './useContract'
 import { useActiveHmyReact } from '../hooks'
 
 export function useAllTokens(): { [address: string]: Token } {
-  const { chainId } = useActiveHmyReact();
+  const { chainId } = useActiveHmyReact()
   const userAddedTokens = useUserAddedTokens()
   const allTokens = useSelectedTokenList()
 
@@ -47,7 +47,7 @@ function parseStringOrBytes32(str: string | undefined, bytes32: string | undefin
 // null if loading
 // otherwise returns the token
 export function useToken(tokenAddress?: string): Token | undefined | null {
-  const { chainId } = useActiveHmyReact();
+  const { chainId } = useActiveHmyReact()
   const tokens = useAllTokens()
 
   const address = isAddress(tokenAddress)
@@ -92,7 +92,7 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
     token,
     tokenName.loading,
     tokenName.result,
-    tokenNameBytes32.result
+    tokenNameBytes32.result,
   ])
 }
 

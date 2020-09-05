@@ -2,7 +2,7 @@ import { Interface } from '@ethersproject/abi'
 import V1_EXCHANGE_ABI from './v1_exchange.json'
 import V1_FACTORY_ABI from './v1_factory.json'
 
-const { ChainID } = require("@harmony-js/utils");
+const { ChainID } = require('@harmony-js/utils')
 
 const V1_FACTORY_ADDRESSES: { [chainId in typeof ChainID]: string } = {
   [ChainID.HmyMainnet]: '0xc0a47dFe034B400B47bDaD5FecDa2621de6c4d95',

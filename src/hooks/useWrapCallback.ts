@@ -10,7 +10,7 @@ import { useActiveHmyReact } from '../hooks'
 export enum WrapType {
   NOT_APPLICABLE,
   WRAP,
-  UNWRAP
+  UNWRAP,
 }
 
 const NOT_APPLICABLE = { wrapType: WrapType.NOT_APPLICABLE }
@@ -25,7 +25,7 @@ export default function useWrapCallback(
   outputCurrency: Currency | undefined,
   typedValue: string | undefined
 ): { wrapType: WrapType; execute?: undefined | (() => Promise<void>); inputError?: string } {
-  const { account, chainId } = useActiveHmyReact();
+  const { account, chainId } = useActiveHmyReact()
 
   const wethContract = useWETHContract()
   const balance = useCurrencyBalance(account ?? undefined, inputCurrency)
@@ -53,9 +53,9 @@ export default function useWrapCallback(
                 }
               }
             : undefined,
-        inputError: sufficientBalance ? undefined : 'Insufficient ETH balance'
+        inputError: sufficientBalance ? undefined : 'Insufficient ETH balance',
       }
-    //@ts-ignore
+      //@ts-ignore
     } else if (currencyEquals(WONE[chainId], inputCurrency) && outputCurrency === HARMONY) {
       return {
         wrapType: WrapType.UNWRAP,
@@ -70,7 +70,7 @@ export default function useWrapCallback(
                 }
               }
             : undefined,
-        inputError: sufficientBalance ? undefined : 'Insufficient WONE balance'
+        inputError: sufficientBalance ? undefined : 'Insufficient WONE balance',
       }
     } else {
       return NOT_APPLICABLE

@@ -1,6 +1,6 @@
 import { FortmaticConnector as FortmaticConnectorCore } from '@web3-react/fortmatic-connector'
 
-const { ChainID } = require("@harmony-js/utils");
+const { ChainID } = require('@harmony-js/utils')
 
 export const OVERLAY_READY = 'OVERLAY_READY'
 
@@ -26,7 +26,7 @@ export class FortmaticConnector extends FortmaticConnectorCore {
 
     const provider = this.fortmatic.getProvider()
 
-    const pollForOverlayReady = new Promise(resolve => {
+    const pollForOverlayReady = new Promise((resolve) => {
       const interval = setInterval(() => {
         if (provider.overlayReady) {
           clearInterval(interval)
@@ -38,7 +38,7 @@ export class FortmaticConnector extends FortmaticConnectorCore {
 
     const [account] = await Promise.all([
       provider.enable().then((accounts: string[]) => accounts[0]),
-      pollForOverlayReady
+      pollForOverlayReady,
     ])
 
     return { provider: this.fortmatic.getProvider(), chainId: (this as any).chainId, account }

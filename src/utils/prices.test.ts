@@ -1,4 +1,4 @@
-import { ChainID } from '@harmony-js/utils';
+import { ChainID } from '@harmony-js/utils'
 import { JSBI, Pair, Route, Token, TokenAmount, Trade, TradeType } from '@swoop-exchange/sdk'
 import { computeTradePriceBreakdown } from './prices'
 
@@ -14,7 +14,7 @@ describe('prices', () => {
     it('returns undefined for undefined', () => {
       expect(computeTradePriceBreakdown(undefined)).toEqual({
         priceImpactWithoutFee: undefined,
-        realizedLPFee: undefined
+        realizedLPFee: undefined,
       })
     })
 

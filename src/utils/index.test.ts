@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { AddressZero } from '@ethersproject/constants'
-import { ChainID } from '@harmony-js/utils';
+import { ChainID } from '@harmony-js/utils'
 import { TokenAmount, Token, Percent, JSBI } from '@swoop-exchange/sdk'
 
 import {
@@ -9,7 +9,7 @@ import {
   isAddress,
   shortenAddress,
   calculateGasMargin,
-  basisPointsToPercent
+  basisPointsToPercent,
 } from '.'
 
 describe('utils', () => {
@@ -38,10 +38,10 @@ describe('utils', () => {
     it('bounds are correct', () => {
       const tokenAmount = new TokenAmount(new Token(ChainID.HmyMainnet, AddressZero, 0), '100')
       expect(() => calculateSlippageAmount(tokenAmount, -1)).toThrow()
-      expect(calculateSlippageAmount(tokenAmount, 0).map(bound => bound.toString())).toEqual(['100', '100'])
-      expect(calculateSlippageAmount(tokenAmount, 100).map(bound => bound.toString())).toEqual(['99', '101'])
-      expect(calculateSlippageAmount(tokenAmount, 200).map(bound => bound.toString())).toEqual(['98', '102'])
-      expect(calculateSlippageAmount(tokenAmount, 10000).map(bound => bound.toString())).toEqual(['0', '200'])
+      expect(calculateSlippageAmount(tokenAmount, 0).map((bound) => bound.toString())).toEqual(['100', '100'])
+      expect(calculateSlippageAmount(tokenAmount, 100).map((bound) => bound.toString())).toEqual(['99', '101'])
+      expect(calculateSlippageAmount(tokenAmount, 200).map((bound) => bound.toString())).toEqual(['98', '102'])
+      expect(calculateSlippageAmount(tokenAmount, 10000).map((bound) => bound.toString())).toEqual(['0', '200'])
       expect(() => calculateSlippageAmount(tokenAmount, 10001)).toThrow()
     })
   })

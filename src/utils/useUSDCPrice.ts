@@ -6,14 +6,14 @@ import { wrappedCurrency } from './wrappedCurrency'
 
 import { useActiveHmyReact } from '../hooks'
 
-const { ChainID } = require("@harmony-js/utils");
+const { ChainID } = require('@harmony-js/utils')
 
 /**
  * Returns the price in USDC of the input currency
  * @param currency currency to compute the USDC price of
  */
 export default function useUSDCPrice(currency?: Currency): Price | undefined {
-  const { chainId } = useActiveHmyReact();
+  const { chainId } = useActiveHmyReact()
   const wrapped = wrappedCurrency(currency, chainId)
   const tokenPairs: [Currency | undefined, Currency | undefined][] = useMemo(
     () => [
@@ -21,12 +21,12 @@ export default function useUSDCPrice(currency?: Currency): Price | undefined {
         // @ts-ignore
         chainId && wrapped && currencyEquals(WONE[chainId], wrapped) ? undefined : currency,
         // @ts-ignore
-        chainId ? WONE[chainId] : undefined
+        chainId ? WONE[chainId] : undefined,
       ],
       // @ts-ignore
       [wrapped?.equals(USDC) ? undefined : wrapped, chainId === ChainID.HmyMainnet ? USDC : undefined],
       // @ts-ignore
-      [chainId ? WONE[chainId] : undefined, chainId === ChainID.HmyMainnet ? USDC : undefined]
+      [chainId ? WONE[chainId] : undefined, chainId === ChainID.HmyMainnet ? USDC : undefined],
     ],
     [chainId, currency, wrapped]
   )
@@ -55,7 +55,7 @@ export default function useUSDCPrice(currency?: Currency): Price | undefined {
     // @ts-ignore
     const ethPairETHAmount = ethPair?.reserveOf(WONE[chainId])
     const ethPairETHUSDCValue: JSBI =
-    // @ts-ignore
+      // @ts-ignore
       ethPairETHAmount && usdcEthPair ? usdcEthPair.priceOf(WONE[chainId]).quote(ethPairETHAmount).raw : JSBI.BigInt(0)
 
     // all other tokens

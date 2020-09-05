@@ -7,10 +7,10 @@ import { PortisConnector } from '@web3-react/portis-connector'
 import { FortmaticConnector } from './Fortmatic'
 import { NetworkConnector } from './NetworkConnector'
 
-import config from "../config";
-import { MathWallet } from '../wallets/mathwallet';
-import { OneWallet } from '../wallets/onewallet';
-import { Hmy } from '../blockchain';
+import config from '../config'
+import { MathWallet } from '../wallets/mathwallet'
+import { OneWallet } from '../wallets/onewallet'
+import { Hmy } from '../blockchain'
 
 const NETWORK_URL = process.env.REACT_APP_NETWORK_URL
 const FORMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY
@@ -23,7 +23,7 @@ if (typeof NETWORK_URL === 'undefined') {
 }
 
 export const network = new NetworkConnector({
-  urls: { [NETWORK_CHAIN_ID]: NETWORK_URL }
+  urls: { [NETWORK_CHAIN_ID]: NETWORK_URL },
 })
 
 let networkLibrary: Web3Provider | undefined
@@ -32,7 +32,7 @@ export function getNetworkLibrary(): Web3Provider {
 }
 
 export const injected = new InjectedConnector({
-  supportedChainIds: [1, 2]
+  supportedChainIds: [1, 2],
 })
 
 // mainnet only
@@ -40,19 +40,19 @@ export const walletconnect = new WalletConnectConnector({
   rpc: { 1: NETWORK_URL },
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
-  pollingInterval: 15000
+  pollingInterval: 15000,
 })
 
 // mainnet only
 export const fortmatic = new FortmaticConnector({
   apiKey: FORMATIC_KEY ?? '',
-  chainId: 1
+  chainId: 1,
 })
 
 // mainnet only
 export const portis = new PortisConnector({
   dAppId: PORTIS_ID ?? '',
-  networks: [1]
+  networks: [1],
 })
 
 // mainnet only
@@ -60,9 +60,9 @@ export const walletlink = new WalletLinkConnector({
   url: NETWORK_URL,
   appName: 'Uniswap',
   appLogoUrl:
-    'https://mpng.pngfly.com/20181202/bex/kisspng-emoji-domain-unicorn-pin-badges-sticker-unicorn-tumblr-emoji-unicorn-iphoneemoji-5c046729264a77.5671679315437924251569.jpg'
+    'https://mpng.pngfly.com/20181202/bex/kisspng-emoji-domain-unicorn-pin-badges-sticker-unicorn-tumblr-emoji-unicorn-iphoneemoji-5c046729264a77.5671679315437924251569.jpg',
 })
 
-export const hmy = new Hmy(config.network);
-export const mathWallet = new MathWallet(config.network, hmy.client);
-export const oneWallet = new OneWallet(config.network, hmy.client);
+export const hmy = new Hmy(config.network)
+export const mathWallet = new MathWallet(config.network, hmy.client)
+export const oneWallet = new OneWallet(config.network, hmy.client)

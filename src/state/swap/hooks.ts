@@ -21,7 +21,7 @@ import { computeSlippageAdjustedAmounts } from '../../utils/prices'
 import { useActiveHmyReact } from '../../hooks'
 
 export function useSwapState(): AppState['swap'] {
-  return useSelector<AppState, AppState['swap']>(state => state.swap)
+  return useSelector<AppState, AppState['swap']>((state) => state.swap)
 }
 
 export function useSwapActionHandlers(): {
@@ -36,7 +36,7 @@ export function useSwapActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency instanceof Token ? currency.address : currency === HARMONY ? 'ONE' : ''
+          currencyId: currency instanceof Token ? currency.address : currency === HARMONY ? 'ONE' : '',
         })
       )
     },
@@ -65,7 +65,7 @@ export function useSwapActionHandlers(): {
     onSwitchTokens,
     onCurrencySelection,
     onUserInput,
-    onChangeRecipient
+    onChangeRecipient,
   }
 }
 
@@ -92,7 +92,7 @@ export function tryParseAmount(value?: string, currency?: Currency): CurrencyAmo
 const BAD_RECIPIENT_ADDRESSES: string[] = [
   '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f', // v2 factory
   '0xf164fC0Ec4E93095b804a4795bBe1e041497b92a', // v2 router 01
-  '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D' // v2 router 02
+  '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D', // v2 router 02
 ]
 
 /**
@@ -102,8 +102,8 @@ const BAD_RECIPIENT_ADDRESSES: string[] = [
  */
 function involvesAddress(trade: Trade, checksummedAddress: string): boolean {
   return (
-    trade.route.path.some(token => token.address === checksummedAddress) ||
-    trade.route.pairs.some(pair => pair.liquidityToken.address === checksummedAddress)
+    trade.route.path.some((token) => token.address === checksummedAddress) ||
+    trade.route.pairs.some((pair) => pair.liquidityToken.address === checksummedAddress)
   )
 }
 
@@ -125,7 +125,7 @@ export function useDerivedSwapInfo(): {
     typedValue,
     [Field.INPUT]: { currencyId: inputCurrencyId },
     [Field.OUTPUT]: { currencyId: outputCurrencyId },
-    recipient
+    recipient,
   } = useSwapState()
 
   const inputCurrency = useCurrency(inputCurrencyId)
@@ -135,7 +135,7 @@ export function useDerivedSwapInfo(): {
 
   const relevantTokenBalances = useCurrencyBalances(account ?? undefined, [
     inputCurrency ?? undefined,
-    outputCurrency ?? undefined
+    outputCurrency ?? undefined,
   ])
 
   const isExactIn: boolean = independentField === Field.INPUT
@@ -148,12 +148,12 @@ export function useDerivedSwapInfo(): {
 
   const currencyBalances = {
     [Field.INPUT]: relevantTokenBalances[0],
-    [Field.OUTPUT]: relevantTokenBalances[1]
+    [Field.OUTPUT]: relevantTokenBalances[1],
   }
 
   const currencies: { [field in Field]?: Currency } = {
     [Field.INPUT]: inputCurrency ?? undefined,
-    [Field.OUTPUT]: outputCurrency ?? undefined
+    [Field.OUTPUT]: outputCurrency ?? undefined,
   }
 
   // get link to trade on v1, if a better rate exists
@@ -201,7 +201,7 @@ export function useDerivedSwapInfo(): {
         : null
       : slippageAdjustedAmounts
       ? slippageAdjustedAmounts[Field.INPUT]
-      : null
+      : null,
   ]
 
   if (balanceIn && amountIn && balanceIn.lessThan(amountIn)) {
@@ -214,7 +214,7 @@ export function useDerivedSwapInfo(): {
     parsedAmount,
     v2Trade: v2Trade ?? undefined,
     inputError,
-    v1Trade
+    v1Trade,
   }
 }
 
@@ -262,14 +262,14 @@ export function queryParametersToSwapState(parsedQs: ParsedQs): SwapState {
 
   return {
     [Field.INPUT]: {
-      currencyId: inputCurrency
+      currencyId: inputCurrency,
     },
     [Field.OUTPUT]: {
-      currencyId: outputCurrency
+      currencyId: outputCurrency,
     },
     typedValue: parseTokenAmountURLParameter(parsedQs.exactAmount),
     independentField: parseIndependentFieldURLParameter(parsedQs.exactField),
-    recipient
+    recipient,
   }
 }
 
@@ -277,7 +277,7 @@ export function queryParametersToSwapState(parsedQs: ParsedQs): SwapState {
 export function useDefaultsFromURLSearch():
   | { inputCurrencyId: string | undefined; outputCurrencyId: string | undefined }
   | undefined {
-  const { chainId } = useActiveHmyReact();
+  const { chainId } = useActiveHmyReact()
   const dispatch = useDispatch<AppDispatch>()
   const parsedQs = useParsedQueryString()
   const [result, setResult] = useState<
@@ -294,7 +294,7 @@ export function useDefaultsFromURLSearch():
         field: parsed.independentField,
         inputCurrencyId: parsed[Field.INPUT].currencyId,
         outputCurrencyId: parsed[Field.OUTPUT].currencyId,
-        recipient: parsed.recipient
+        recipient: parsed.recipient,
       })
     )
 

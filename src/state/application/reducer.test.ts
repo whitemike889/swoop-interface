@@ -1,4 +1,4 @@
-import { ChainID } from '@harmony-js/utils';
+import { ChainID } from '@harmony-js/utils'
 import { createStore, Store } from 'redux'
 import { addPopup, removePopup, toggleSettingsMenu, toggleWalletModal, updateBlockNumber } from './actions'
 import reducer, { ApplicationState } from './reducer'
@@ -12,8 +12,8 @@ describe('application reducer', () => {
       walletModalOpen: false,
       settingsMenuOpen: false,
       blockNumber: {
-        [ChainID.HmyMainnet]: 3
-      }
+        [ChainID.HmyMainnet]: 3,
+      },
     })
   })
 
@@ -75,7 +75,7 @@ describe('application reducer', () => {
       store.dispatch(updateBlockNumber({ chainId: ChainID.HmyTestnet, blockNumber: 2 }))
       expect(store.getState().blockNumber).toEqual({
         [ChainID.HmyMainnet]: 3,
-        [ChainID.HmyTestnet]: 2
+        [ChainID.HmyTestnet]: 2,
       })
     })
   })

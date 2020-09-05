@@ -5,7 +5,7 @@ import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
 import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json'
 import { ROUTER_ADDRESS } from '../constants'
-import { ChainID } from '@harmony-js/utils';
+import { ChainID } from '@harmony-js/utils'
 import { JSBI, Percent, Token, CurrencyAmount, Currency, HARMONY } from '@swoop-exchange/sdk'
 import { TokenAddressMap } from '../state/lists/hooks'
 
@@ -41,11 +41,11 @@ const ETHERSCAN_PREFIXES: { [chainId in ChainID]: string } = {
   42: '',
   61: '',
   62: '',
-  1337: ''
+  1337: '',
 }
 
 export function getHarmonyExplorerLink(hmy: Hmy, data: string, type: 'transaction' | 'token' | 'address'): string {
-  const prefix = hmy.explorerUrl;
+  const prefix = hmy.explorerUrl
 
   switch (type) {
     case 'transaction': {
@@ -63,7 +63,7 @@ export function getHarmonyExplorerLink(hmy: Hmy, data: string, type: 'transactio
 
 export function getEtherscanLink(chainId: ChainID, data: string, type: 'transaction' | 'token' | 'address'): string {
   const prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}etherscan.io`
-  
+
   switch (type) {
     case 'transaction': {
       return `${prefix}/tx/${data}`
@@ -89,7 +89,7 @@ export function shortenAddress(address: string, chars = 4): string {
 
 export function shortenHarmonyAddress(address: string, chars = 4): string {
   const parsed = isHarmonyAddress(address)
-  
+
   if (!parsed) {
     throw Error(`Invalid 'address' parameter '${address}'.`)
   }
@@ -112,7 +112,7 @@ export function calculateSlippageAmount(value: CurrencyAmount, slippage: number)
   }
   return [
     JSBI.divide(JSBI.multiply(value.raw, JSBI.BigInt(10000 - slippage)), JSBI.BigInt(10000)),
-    JSBI.divide(JSBI.multiply(value.raw, JSBI.BigInt(10000 + slippage)), JSBI.BigInt(10000))
+    JSBI.divide(JSBI.multiply(value.raw, JSBI.BigInt(10000 + slippage)), JSBI.BigInt(10000)),
   ]
 }
 
@@ -137,13 +137,13 @@ export function getContract(address: string, ABI: any, library: Web3Provider, ac
 
 // account is optional
 export function getHarmonyContract(address: string, ABI: any, library: Web3Provider, wallet?: AbstractWallet): any {
-  let contract = hmy.client.contracts.createContract(ABI, address);
-  
+  let contract = hmy.client.contracts.createContract(ABI, address)
+
   if (wallet) {
-    contract = wallet.attachToContract(contract);
+    contract = wallet.attachToContract(contract)
   }
 
-  return contract;
+  return contract
 }
 
 // account is optional

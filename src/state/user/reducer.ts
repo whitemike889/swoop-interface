@@ -64,12 +64,12 @@ export const initialState: UserState = {
   tokens: {},
   pairs: {},
   timestamp: currentTimestamp(),
-  userWallet: {type: null, address: null, bech32Address: null, active: false}
+  userWallet: { type: null, address: null, bech32Address: null, active: false },
 }
 
-export default createReducer(initialState, builder =>
+export default createReducer(initialState, (builder) =>
   builder
-    .addCase(updateVersion, state => {
+    .addCase(updateVersion, (state) => {
       // slippage isnt being tracked in local storage, reset to default
       // noinspection SuspiciousTypeOfGuard
       if (typeof state.userSlippageTolerance !== 'number') {
