@@ -30,18 +30,12 @@ export function isHarmonyAddress(value: any): string | false {
   }
 }
 
-const ETHERSCAN_PREFIXES: { [chainId in ChainID]: string } = {
-  0: '',
+const ETHERSCAN_PREFIXES: { [chainId: number]: string } = {
   1: '',
-  2: 'testnet.',
-  3: '',
-  4: '',
-  30: '',
-  31: '',
-  42: '',
-  61: '',
-  62: '',
-  1337: '',
+  3: 'ropsten.',
+  4: 'rinkeby.',
+  5: 'goerli.',
+  42: 'kovan.'
 }
 
 export function getHarmonyExplorerLink(hmy: Hmy, data: string, type: 'transaction' | 'token' | 'address'): string {
