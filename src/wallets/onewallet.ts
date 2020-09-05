@@ -71,9 +71,7 @@ export class OneWallet extends AbstractWallet {
   }
 
   private initWallet() {
-    // @ts-ignore
     if (window.onewallet) {
-      // @ts-ignore
       this.onewallet = window.onewallet
       this.isOneWallet = true
 
@@ -129,7 +127,6 @@ export class OneWallet extends AbstractWallet {
       try {
         tx.from = this.address
 
-        // @ts-ignore
         const signTx = await this.signTransaction(tx)
 
         return signTx

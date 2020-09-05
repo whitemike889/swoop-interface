@@ -1,5 +1,5 @@
 import { TransactionResponse } from '@ethersproject/abstract-provider'
-import { JSBI, Token, TokenAmount, WONE, Fraction, Percent, CurrencyAmount } from '@swoop-exchange/sdk'
+import { JSBI, Token, TokenAmount, WONE, Fraction, Percent, CurrencyAmount } from '@harmony-swoop/sdk'
 import React, { useCallback, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
 import { Redirect, RouteComponentProps } from 'react-router'
@@ -34,13 +34,13 @@ const ZERO_FRACTION = new Fraction(ZERO, ONE)
 function V1PairRemoval({
   exchangeContract,
   liquidityTokenAmount,
-  token
+  token,
 }: {
   exchangeContract: Contract
   liquidityTokenAmount: TokenAmount
   token: Token
 }) {
-  const { chainId } = useActiveHmyReact();
+  const { chainId } = useActiveHmyReact()
   const totalSupply = useTotalSupply(liquidityTokenAmount.token)
   const exchangeETHBalance = useETHBalances([liquidityTokenAmount.token.address])?.[liquidityTokenAmount.token.address]
   const exchangeTokenBalance = useTokenBalance(liquidityTokenAmount.token.address, token)
@@ -61,7 +61,7 @@ function V1PairRemoval({
   const addTransaction = useTransactionAdder()
   const isRemovalPending = useIsTransactionPending(pendingRemovalHash ?? undefined)
 
-  //@ts-ignore
+  //
   const woneToken = WONE[chainId]
 
   const remove = useCallback(() => {
@@ -79,11 +79,11 @@ function V1PairRemoval({
         ReactGA.event({
           category: 'Remove',
           action: 'V1',
-          label: token?.symbol
+          label: token?.symbol,
         })
 
         addTransaction(response, {
-          summary: `Remove ${chainId && token.equals(woneToken) ? 'WONE' : token.symbol}/ONE V1 liquidity`
+          summary: `Remove ${chainId && token.equals(woneToken) ? 'WONE' : token.symbol}/ONE V1 liquidity`,
         })
         setPendingRemovalHash(response.hash)
       })
@@ -132,11 +132,11 @@ function V1PairRemoval({
 
 export default function RemoveV1Exchange({
   match: {
-    params: { address }
-  }
+    params: { address },
+  },
 }: RouteComponentProps<{ address: string }>) {
   const validatedAddress = isAddress(address)
-  const { account, chainId } = useActiveHmyReact();
+  const { account, chainId } = useActiveHmyReact()
 
   const exchangeContract = useV1ExchangeContract(validatedAddress ? validatedAddress : undefined, true)
   const tokenAddress = useSingleCallResult(exchangeContract, 'tokenAddress', undefined, NEVER_RELOAD)?.result?.[0]

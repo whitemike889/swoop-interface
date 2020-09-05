@@ -28,12 +28,12 @@ export function shouldCheck(
 }
 
 export default function Updater(): null {
-  const { chainId, library } = useActiveHmyReact();
+  const { chainId, library } = useActiveHmyReact()
 
   const lastBlockNumber = useBlockNumber()
 
   const dispatch = useDispatch<AppDispatch>()
-  const state = useSelector<AppState, AppState['transactions']>(state => state.transactions)
+  const state = useSelector<AppState, AppState['transactions']>((state) => state.transactions)
 
   const transactions = chainId ? state[chainId] ?? {} : {}
 
@@ -44,8 +44,8 @@ export default function Updater(): null {
     if (!chainId || !library || !lastBlockNumber) return
 
     Object.keys(transactions)
-      .filter(hash => shouldCheck(lastBlockNumber, transactions[hash]))
-      .forEach(hash => {
+      .filter((hash) => shouldCheck(lastBlockNumber, transactions[hash]))
+      .forEach((hash) => {
         library
           .getTransactionReceipt(hash)
           .then((receipt: any) => {
@@ -62,8 +62,8 @@ export default function Updater(): null {
                     status: receipt.status,
                     to: receipt.to,
                     transactionHash: receipt.transactionHash,
-                    transactionIndex: receipt.transactionIndex
-                  }
+                    transactionIndex: receipt.transactionIndex,
+                  },
                 })
               )
 
@@ -72,8 +72,8 @@ export default function Updater(): null {
                   txn: {
                     hash,
                     success: receipt.status === 1,
-                    summary: transactions[hash]?.summary
-                  }
+                    summary: transactions[hash]?.summary,
+                  },
                 },
                 hash
               )

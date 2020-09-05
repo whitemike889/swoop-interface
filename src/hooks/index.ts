@@ -30,7 +30,7 @@ export interface HmyReactContextInterface {
 export function useActiveHmyReact(): HmyReactContextInterface & { chainId?: typeof ChainID } {
   const [userWallet] = useUserWallet()
 
-  let hmyReact: HmyReactContextInterface = {
+  const hmyReact: HmyReactContextInterface = {
     userWallet: userWallet,
     wallet: useUserActiveWallet(),
     wrapper: hmy,

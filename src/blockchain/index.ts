@@ -1,3 +1,4 @@
+/* eslint-disable */
 const { Harmony } = require('@harmony-js/core')
 const { ChainID, ChainType } = require('@harmony-js/utils')
 

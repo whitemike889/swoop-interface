@@ -69,7 +69,7 @@ const Input = styled.input<{ error?: boolean }>`
 export default function AddressInputPanel({
   id,
   value,
-  onChange
+  onChange,
 }: {
   id?: string
   // the typed string value
@@ -77,13 +77,13 @@ export default function AddressInputPanel({
   // triggers whenever the typed value changes
   onChange: (value: string) => void
 }) {
-  const { chainId, wrapper } = useActiveHmyReact();
+  const { chainId, wrapper } = useActiveHmyReact()
   const theme = useContext(ThemeContext)
 
   const { address, loading, name } = useENS(value)
 
   const handleInput = useCallback(
-    event => {
+    (event) => {
       const input = event.target.value
       const withoutSpaces = input.replace(/\s+/g, '')
       onChange(withoutSpaces)
@@ -103,7 +103,10 @@ export default function AddressInputPanel({
                 Recipient
               </TYPE.black>
               {address && chainId && (
-                <ExternalLink href={getHarmonyExplorerLink(wrapper, name ?? address, 'address')} style={{ fontSize: '14px' }}>
+                <ExternalLink
+                  href={getHarmonyExplorerLink(wrapper, name ?? address, 'address')}
+                  style={{ fontSize: '14px' }}
+                >
                   (View on Harmony Explorer)
                 </ExternalLink>
               )}

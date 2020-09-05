@@ -21,7 +21,7 @@ import Web3Status from '../Web3Status'
 
 import { useActiveHmyReact } from '../../hooks'
 
-const { ChainID } = require("@harmony-js/utils");
+const { ChainID } = require('@harmony-js/utils')
 
 const HeaderFrame = styled.div`
   display: flex;
@@ -149,7 +149,7 @@ const NETWORK_LABELS: { [chainId in typeof ChainID]: string | null } = {
 }
 
 export default function Header() {
-  const { account, chainId } = useActiveHmyReact()
+  const { account, chainId } = useActiveHmyReact()
 
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const [isDark] = useDarkModeManager()
@@ -163,7 +163,12 @@ export default function Header() {
               <img src={isDark ? LogoDark : Logo} alt="logo" />
             </UniIcon>
             <TitleText>
-              <img height="16" style={{ marginLeft: '4px', marginTop: '-4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" />
+              <img
+                height="16"
+                style={{ marginLeft: '4px', marginTop: '-4px' }}
+                src={isDark ? WordmarkDark : Wordmark}
+                alt="logo"
+              />
             </TitleText>
           </Title>
         </HeaderElement>

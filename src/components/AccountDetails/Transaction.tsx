@@ -38,7 +38,7 @@ const IconWrapper = styled.div<{ pending: boolean; success?: boolean }>`
 `
 
 export default function Transaction({ hash }: { hash: string }) {
-  const { chainId, wrapper } = useActiveHmyReact();
+  const { chainId, wrapper } = useActiveHmyReact()
   const allTransactions = useAllTransactions()
 
   const tx = allTransactions?.[hash]

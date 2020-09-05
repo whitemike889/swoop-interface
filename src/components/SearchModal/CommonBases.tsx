@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text } from 'rebass'
-import { ChainID } from '@harmony-js/utils';
-import { Currency, currencyEquals, HARMONY, Token } from '@swoop-exchange/sdk'
+import { ChainID } from '@harmony-js/utils'
+import { Currency, currencyEquals, HARMONY, Token } from '@harmony-swoop/sdk'
 import styled from 'styled-components'
 
 import { SUGGESTED_BASES } from '../../constants'
@@ -29,7 +29,7 @@ const BaseWrapper = styled.div<{ disable?: boolean }>`
 export default function CommonBases({
   chainId,
   onSelect,
-  selectedCurrency
+  selectedCurrency,
 }: {
   chainId?: ChainID
   selectedCurrency?: Currency | null

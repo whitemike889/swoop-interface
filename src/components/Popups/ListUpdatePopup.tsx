@@ -17,7 +17,7 @@ export default function ListUpdatePopup({
   listUrl,
   oldList,
   newList,
-  auto
+  auto,
 }: {
   popKey: string
   listUrl: string
@@ -34,7 +34,7 @@ export default function ListUpdatePopup({
     ReactGA.event({
       category: 'Lists',
       action: 'Update List from Popup',
-      label: listUrl
+      label: listUrl,
     })
     dispatch(acceptListUpdate(listUrl))
     removeThisPopup()
@@ -67,7 +67,7 @@ export default function ListUpdatePopup({
               <ul>
                 {tokensAdded.length > 0 ? (
                   <li>
-                    {tokensAdded.map(token => (
+                    {tokensAdded.map((token) => (
                       <strong key={`${token.chainId}-${token.address}`} title={token.address}>
                         {token.symbol}
                       </strong>
@@ -77,7 +77,7 @@ export default function ListUpdatePopup({
                 ) : null}
                 {tokensRemoved.length > 0 ? (
                   <li>
-                    {tokensRemoved.map(token => (
+                    {tokensRemoved.map((token) => (
                       <strong key={`${token.chainId}-${token.address}`} title={token.address}>
                         {token.symbol}
                       </strong>

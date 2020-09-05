@@ -13,7 +13,7 @@ export function useTransactionAdder(): (
   response: TransactionResponse,
   customData?: { summary?: string; approval?: { tokenAddress: string; spender: string } }
 ) => void {
-  const { account, chainId } = useActiveHmyReact();
+  const { account, chainId } = useActiveHmyReact()
   const dispatch = useDispatch<AppDispatch>()
 
   return useCallback(
@@ -36,9 +36,9 @@ export function useTransactionAdder(): (
 
 // returns all the transactions for the current chain
 export function useAllTransactions(): { [txHash: string]: TransactionDetails } {
-  const { chainId } = useActiveHmyReact();
+  const { chainId } = useActiveHmyReact()
 
-  const state = useSelector<AppState, AppState['transactions']>(state => state.transactions)
+  const state = useSelector<AppState, AppState['transactions']>((state) => state.transactions)
 
   return chainId ? state[chainId] ?? {} : {}
 }
@@ -66,7 +66,7 @@ export function useHasPendingApproval(tokenAddress: string | undefined, spender:
     () =>
       typeof tokenAddress === 'string' &&
       typeof spender === 'string' &&
-      Object.keys(allTransactions).some(hash => {
+      Object.keys(allTransactions).some((hash) => {
         const tx = allTransactions[hash]
         if (!tx) return false
         if (tx.receipt) {

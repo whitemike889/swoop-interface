@@ -16,13 +16,13 @@ const RowNoFlex = styled(AutoRow)`
 export default function TransactionPopup({
   hash,
   success,
-  summary
+  summary,
 }: {
   hash: string
   success?: boolean
   summary?: string
 }) {
-  const { chainId, wrapper } = useActiveHmyReact();
+  const { chainId, wrapper } = useActiveHmyReact()
 
   const theme = useContext(ThemeContext)
 
@@ -34,7 +34,9 @@ export default function TransactionPopup({
       <AutoColumn gap="8px">
         <TYPE.body fontWeight={500}>{summary ?? 'Hash: ' + hash.slice(0, 8) + '...' + hash.slice(58, 65)}</TYPE.body>
         {chainId && (
-          <ExternalLink href={getHarmonyExplorerLink(wrapper, hash, 'transaction')}>View on Harmony Explorer</ExternalLink>
+          <ExternalLink href={getHarmonyExplorerLink(wrapper, hash, 'transaction')}>
+            View on Harmony Explorer
+          </ExternalLink>
         )}
       </AutoColumn>
     </RowNoFlex>

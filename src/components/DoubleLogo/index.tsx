@@ -1,4 +1,4 @@
-import { Currency } from '@swoop-exchange/sdk'
+import { Currency } from '@harmony-swoop/sdk'
 import React from 'react'
 import styled from 'styled-components'
 import CurrencyLogo from '../CurrencyLogo'
@@ -29,7 +29,7 @@ export default function DoubleCurrencyLogo({
   currency0,
   currency1,
   size = 16,
-  margin = false
+  margin = false,
 }: DoubleCurrencyLogoProps) {
   return (
     <Wrapper sizeraw={size} margin={margin}>

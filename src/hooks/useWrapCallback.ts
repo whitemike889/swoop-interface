@@ -1,4 +1,4 @@
-import { Currency, currencyEquals, HARMONY, WONE } from '@swoop-exchange/sdk'
+import { Currency, currencyEquals, HARMONY, WONE } from '@harmony-swoop/sdk'
 import { useMemo } from 'react'
 import { tryParseAmount } from '../state/swap/hooks'
 import { useTransactionAdder } from '../state/transactions/hooks'
@@ -38,7 +38,6 @@ export default function useWrapCallback(
 
     const sufficientBalance = inputAmount && balance && !balance.lessThan(inputAmount)
 
-    //@ts-ignore
     if (inputCurrency === HARMONY && currencyEquals(WONE[chainId], outputCurrency)) {
       return {
         wrapType: WrapType.WRAP,
@@ -55,7 +54,6 @@ export default function useWrapCallback(
             : undefined,
         inputError: sufficientBalance ? undefined : 'Insufficient ETH balance',
       }
-      //@ts-ignore
     } else if (currencyEquals(WONE[chainId], inputCurrency) && outputCurrency === HARMONY) {
       return {
         wrapType: WrapType.UNWRAP,

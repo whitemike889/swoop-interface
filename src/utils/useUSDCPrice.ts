@@ -1,4 +1,4 @@
-import { Currency, currencyEquals, JSBI, Price, WONE } from '@swoop-exchange/sdk'
+import { Currency, currencyEquals, JSBI, Price, WONE } from '@harmony-swoop/sdk'
 import { useMemo } from 'react'
 import { USDC } from '../constants'
 import { PairState, usePairs } from '../data/Reserves'
@@ -18,14 +18,10 @@ export default function useUSDCPrice(currency?: Currency): Price | undefined {
   const tokenPairs: [Currency | undefined, Currency | undefined][] = useMemo(
     () => [
       [
-        // @ts-ignore
         chainId && wrapped && currencyEquals(WONE[chainId], wrapped) ? undefined : currency,
-        // @ts-ignore
         chainId ? WONE[chainId] : undefined,
       ],
-      // @ts-ignore
       [wrapped?.equals(USDC) ? undefined : wrapped, chainId === ChainID.HmyMainnet ? USDC : undefined],
-      // @ts-ignore
       [chainId ? WONE[chainId] : undefined, chainId === ChainID.HmyMainnet ? USDC : undefined],
     ],
     [chainId, currency, wrapped]
@@ -37,10 +33,8 @@ export default function useUSDCPrice(currency?: Currency): Price | undefined {
       return undefined
     }
     // handle weth/eth
-    // @ts-ignore
     if (wrapped.equals(WONE[chainId])) {
       if (usdcPair) {
-        // @ts-ignore
         const price = usdcPair.priceOf(WONE[chainId])
         return new Price(currency, USDC, price.denominator, price.numerator)
       } else {
@@ -52,10 +46,8 @@ export default function useUSDCPrice(currency?: Currency): Price | undefined {
       return new Price(USDC, USDC, '1', '1')
     }
 
-    // @ts-ignore
     const ethPairETHAmount = ethPair?.reserveOf(WONE[chainId])
     const ethPairETHUSDCValue: JSBI =
-      // @ts-ignore
       ethPairETHAmount && usdcEthPair ? usdcEthPair.priceOf(WONE[chainId]).quote(ethPairETHAmount).raw : JSBI.BigInt(0)
 
     // all other tokens
@@ -65,10 +57,8 @@ export default function useUSDCPrice(currency?: Currency): Price | undefined {
       return new Price(currency, USDC, price.denominator, price.numerator)
     }
     if (ethPairState === PairState.EXISTS && ethPair && usdcEthPairState === PairState.EXISTS && usdcEthPair) {
-      // @ts-ignore
       if (usdcEthPair.reserveOf(USDC).greaterThan('0') && ethPair.reserveOf(WONE[chainId]).greaterThan('0')) {
         const ethUsdcPrice = usdcEthPair.priceOf(USDC)
-        // @ts-ignore
         const currencyEthPrice = ethPair.priceOf(WONE[chainId])
         const usdcPrice = ethUsdcPrice.multiply(currencyEthPrice).invert()
         return new Price(currency, USDC, usdcPrice.denominator, usdcPrice.numerator)

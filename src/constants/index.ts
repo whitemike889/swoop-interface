@@ -1,4 +1,4 @@
-import { JSBI, Percent, Token, WONE } from '@swoop-exchange/sdk'
+import { JSBI, Percent, Token, WONE } from '@harmony-swoop/sdk'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
 import { injected, oneWallet, mathWallet } from '../connectors'
@@ -26,9 +26,7 @@ export const MKR = new Token(ChainID.HmyMainnet, '0x9f8F72aA9304c8B593d555F12eF6
 export const AMPL = new Token(ChainID.HmyMainnet, '0xD46bA6D942050d489DBd938a2C909A5d5039A161', 9, 'AMPL', 'Ampleforth')
 
 const WONE_ONLY: ChainTokenList = {
-  // @ts-ignore
   [ChainID.HmyMainnet]: [WONE[ChainID.HmyMainnet]],
-  // @ts-ignore
   [ChainID.HmyTestnet]: [WONE[ChainID.HmyTestnet]],
 }
 
@@ -44,7 +42,6 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
  */
 export const CUSTOM_BASES: { [chainId in typeof ChainID]?: { [tokenAddress: string]: Token[] } } = {
   [ChainID.HmyMainnet]: {
-    // @ts-ignore
     [AMPL.address]: [DAI, WONE[ChainID.HmyMainnet]],
   },
 }

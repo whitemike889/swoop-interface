@@ -1,4 +1,4 @@
-import { ChainID } from '@harmony-js/utils';
+import { ChainID } from '@harmony-js/utils'
 import React, { useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 import Modal from '../Modal'
@@ -69,14 +69,14 @@ function ConfirmationPendingContent({ onDismiss, pendingText }: { onDismiss: () 
 function TransactionSubmittedContent({
   onDismiss,
   chainId,
-  hash
+  hash,
 }: {
   onDismiss: () => void
   hash: string | undefined
   chainId: ChainID
 }) {
   const theme = useContext(ThemeContext)
-  const { wrapper } = useActiveHmyReact();
+  const { wrapper } = useActiveHmyReact()
 
   return (
     <Wrapper>
@@ -115,7 +115,7 @@ export function ConfirmationModalContent({
   title,
   bottomContent,
   onDismiss,
-  topContent
+  topContent,
 }: {
   title: string
   onDismiss: () => void
@@ -178,9 +178,9 @@ export default function TransactionConfirmationModal({
   attemptingTxn,
   hash,
   pendingText,
-  content
+  content,
 }: ConfirmationModalProps) {
-  const { chainId } = useActiveHmyReact();
+  const { chainId } = useActiveHmyReact()
 
   if (!chainId) return null
 

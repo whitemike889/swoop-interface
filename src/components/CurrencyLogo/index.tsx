@@ -1,4 +1,4 @@
-import { Currency, HARMONY, Token } from '@swoop-exchange/sdk'
+import { Currency, HARMONY, Token } from '@harmony-swoop/sdk'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
@@ -25,7 +25,7 @@ const StyledLogo = styled(Logo)<{ size: string }>`
 export default function CurrencyLogo({
   currency,
   size = '24px',
-  style
+  style,
 }: {
   currency?: Currency
   size?: string

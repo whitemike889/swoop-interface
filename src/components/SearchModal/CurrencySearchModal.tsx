@@ -1,4 +1,4 @@
-import { Currency } from '@swoop-exchange/sdk'
+import { Currency } from '@harmony-swoop/sdk'
 import React, { useCallback, useEffect, useState } from 'react'
 import ReactGA from 'react-ga'
 import useLast from '../../hooks/useLast'
@@ -23,7 +23,7 @@ export default function CurrencySearchModal({
   onCurrencySelect,
   selectedCurrency,
   otherSelectedCurrency,
-  showCommonBases = false
+  showCommonBases = false,
 }: CurrencySearchModalProps) {
   const [listView, setListView] = useState<boolean>(false)
   const lastOpen = useLast(isOpen)
@@ -45,14 +45,14 @@ export default function CurrencySearchModal({
   const handleClickChangeList = useCallback(() => {
     ReactGA.event({
       category: 'Lists',
-      action: 'Change Lists'
+      action: 'Change Lists',
     })
     setListView(true)
   }, [])
   const handleClickBack = useCallback(() => {
     ReactGA.event({
       category: 'Lists',
-      action: 'Back'
+      action: 'Back',
     })
     setListView(false)
   }, [])

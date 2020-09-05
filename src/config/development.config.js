@@ -1,5 +1,5 @@
 const config = {
   network: 'testnet',
-};
+}
 
-export default config;
+export default config

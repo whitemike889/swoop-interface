@@ -1,6 +1,6 @@
 import { TransactionResponse } from '@ethersproject/abstract-provider'
 import { AddressZero } from '@ethersproject/constants'
-import { Currency, CurrencyAmount, Fraction, JSBI, Percent, Token, TokenAmount, WONE } from '@swoop-exchange/sdk'
+import { Currency, CurrencyAmount, Fraction, JSBI, Percent, Token, TokenAmount, WONE } from '@harmony-swoop/sdk'
 import React, { useCallback, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
 import { Redirect, RouteComponentProps } from 'react-router'
@@ -52,16 +52,16 @@ export function V1LiquidityInfo({
   token,
   liquidityTokenAmount,
   tokenWorth,
-  ethWorth
+  ethWorth,
 }: {
   token: Token
   liquidityTokenAmount: TokenAmount
   tokenWorth: TokenAmount
   ethWorth: CurrencyAmount
 }) {
-  const { chainId } = useActiveHmyReact();
+  const { chainId } = useActiveHmyReact()
 
-  //@ts-ignore
+  //
   const woneToken = WONE[chainId]
 
   return (
@@ -103,16 +103,14 @@ export function V1LiquidityInfo({
 }
 
 function V1PairMigration({ liquidityTokenAmount, token }: { liquidityTokenAmount: TokenAmount; token: Token }) {
-  const { account, chainId, wrapper } = useActiveHmyReact();
+  const { account, chainId, wrapper } = useActiveHmyReact()
   const totalSupply = useTotalSupply(liquidityTokenAmount.token)
   const exchangeETHBalance = useETHBalances([liquidityTokenAmount.token.address])?.[liquidityTokenAmount.token.address]
   const exchangeTokenBalance = useTokenBalance(liquidityTokenAmount.token.address, token)
 
-  //@ts-ignore
   const [v2PairState, v2Pair] = usePair(chainId ? WONE[chainId] : undefined, token)
   const isFirstLiquidityProvider: boolean = v2PairState === PairState.NOT_EXISTS
 
-  //@ts-ignore
   const v2SpotPrice = chainId && v2Pair ? v2Pair.reserveOf(token).divide(v2Pair.reserveOf(WONE[chainId])) : undefined
 
   const [confirmingMigration, setConfirmingMigration] = useState<boolean>(false)
@@ -136,12 +134,7 @@ function V1PairMigration({ liquidityTokenAmount, token }: { liquidityTokenAmount
       : null
 
   const priceDifferenceFraction: Fraction | undefined =
-    v1SpotPrice && v2SpotPrice
-      ? v1SpotPrice
-          .divide(v2SpotPrice)
-          .multiply('100')
-          .subtract('100')
-      : undefined
+    v1SpotPrice && v2SpotPrice ? v1SpotPrice.divide(v2SpotPrice).multiply('100').subtract('100') : undefined
 
   const priceDifferenceAbs: Fraction | undefined = priceDifferenceFraction?.lessThan(ZERO)
     ? priceDifferenceFraction?.multiply('-1')
@@ -149,10 +142,7 @@ function V1PairMigration({ liquidityTokenAmount, token }: { liquidityTokenAmount
 
   const minAmountETH: JSBI | undefined =
     v2SpotPrice && tokenWorth
-      ? tokenWorth
-          .divide(v2SpotPrice)
-          .multiply(WEI_DENOM)
-          .multiply(ALLOWED_OUTPUT_MIN_PERCENT).quotient
+      ? tokenWorth.divide(v2SpotPrice).multiply(WEI_DENOM).multiply(ALLOWED_OUTPUT_MIN_PERCENT).quotient
       : ethWorth?.numerator
 
   const minAmountToken: JSBI | undefined =
@@ -183,11 +173,11 @@ function V1PairMigration({ liquidityTokenAmount, token }: { liquidityTokenAmount
         ReactGA.event({
           category: 'Migrate',
           action: 'V1->V2',
-          label: token?.symbol
+          label: token?.symbol,
         })
 
         addTransaction(response, {
-          summary: `Migrate ${token.symbol} liquidity to V2`
+          summary: `Migrate ${token.symbol} liquidity to V2`,
         })
         setPendingMigrationHash(response.hash)
       })
@@ -331,12 +321,12 @@ function V1PairMigration({ liquidityTokenAmount, token }: { liquidityTokenAmount
 export default function MigrateV1Exchange({
   history,
   match: {
-    params: { address }
-  }
+    params: { address },
+  },
 }: RouteComponentProps<{ address: string }>) {
   const validatedAddress = isAddress(address)
 
-  const { account, chainId } = useActiveHmyReact();
+  const { account, chainId } = useActiveHmyReact()
 
   const exchangeContract = useV1ExchangeContract(validatedAddress ? validatedAddress : undefined)
   const tokenAddress = useSingleCallResult(exchangeContract, 'tokenAddress', undefined, NEVER_RELOAD)?.result?.[0]
@@ -358,7 +348,7 @@ export default function MigrateV1Exchange({
     return <Redirect to="/migrate/v1" />
   }
 
-  //@ts-ignore
+  //
   const woneToken = WONE[chainId]
 
   return (

@@ -19,9 +19,9 @@ import { injected, fortmatic, portis } from '../../connectors'
 import { OVERLAY_READY } from '../../connectors/Fortmatic'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 //import { AbstractConnector } from '@web3-react/abstract-connector'
-import { AbstractWallet } from '../../wallets/AbstractWallet';
+import { AbstractWallet } from '../../wallets/AbstractWallet'
 
-import {useUserWallet} from '../../state/user/hooks'
+import { useUserWallet } from '../../state/user/hooks'
 
 const CloseIcon = styled.div`
   position: absolute;
@@ -50,7 +50,7 @@ const HeaderRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
   padding: 1rem 1rem;
   font-weight: 500;
-  color: ${props => (props.color === 'blue' ? ({ theme }) => theme.primary1 : 'inherit')};
+  color: ${(props) => (props.color === 'blue' ? ({ theme }) => theme.primary1 : 'inherit')};
   ${({ theme }) => theme.mediaWidth.upToMedium`
     padding: 1rem;
   `};
@@ -116,13 +116,13 @@ const WALLET_VIEWS = {
   OPTIONS: 'options',
   OPTIONS_SECONDARY: 'options_secondary',
   ACCOUNT: 'account',
-  PENDING: 'pending'
+  PENDING: 'pending',
 }
 
 export default function WalletModal({
   pendingTransactions,
   confirmedTransactions,
-  ENSName
+  ENSName,
 }: {
   pendingTransactions: string[] // hashes of pending
   confirmedTransactions: string[] // hashes of confirmed
@@ -174,7 +174,7 @@ export default function WalletModal({
 
   const tryActivation = async (connector: AbstractWallet | undefined) => {
     let name = ''
-    Object.keys(SUPPORTED_WALLETS).map(key => {
+    Object.keys(SUPPORTED_WALLETS).map((key) => {
       if (connector === SUPPORTED_WALLETS[key].connector) {
         return (name = SUPPORTED_WALLETS[key].name)
       }
@@ -185,7 +185,7 @@ export default function WalletModal({
     ReactGA.event({
       category: 'Wallet',
       action: 'Change Wallet',
-      label: name
+      label: name,
     })
     setPendingWallet(connector) // set wallet for pending view
     setWalletView(WALLET_VIEWS.PENDING)
@@ -195,25 +195,27 @@ export default function WalletModal({
       connector.walletConnectProvider = undefined
     }
 
-    connector && connector.signIn()
-    .then(() => {
-      let wallet: UserWallet = {
-        type: connector.sessionType,
-        address: connector.base16Address,
-        bech32Address: connector.address,
-        active: true
-      };
+    connector &&
+      connector
+        .signIn()
+        .then(() => {
+          const wallet: UserWallet = {
+            type: connector.sessionType,
+            address: connector.base16Address,
+            bech32Address: connector.address,
+            active: true,
+          }
 
-      setPendingError(false);
-      setAccount(connector.address);
-      setActive(true);
-      setUserWallet(wallet);
-      setWalletView(WALLET_VIEWS.ACCOUNT);
-      //toggleWalletModal();
-    })
-    .catch(error => {
-      setPendingError(true)
-    });
+          setPendingError(false)
+          setAccount(connector.address)
+          setActive(true)
+          setUserWallet(wallet)
+          setWalletView(WALLET_VIEWS.ACCOUNT)
+          //toggleWalletModal();
+        })
+        .catch((error) => {
+          setPendingError(true)
+        })
 
     /*connector &&
       activate(connector, undefined, true).catch(error => {
@@ -235,7 +237,7 @@ export default function WalletModal({
   // get wallets user can switch too, depending on device/browser
   function getOptions() {
     const isMetamask = window.ethereum && window.ethereum.isMetaMask
-    return Object.keys(SUPPORTED_WALLETS).map(key => {
+    return Object.keys(SUPPORTED_WALLETS).map((key) => {
       const option = SUPPORTED_WALLETS[key]
       // check for mobile options
       if (isMobile) {

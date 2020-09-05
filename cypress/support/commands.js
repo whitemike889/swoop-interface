@@ -77,6 +77,6 @@ Cypress.Commands.overwrite('visit', (original, url, options) => {
       const provider = new JsonRpcProvider('https://rinkeby.infura.io/v3/be5b7ed2d1cf4de58742aefca86b82e8', 4)
       const signer = new Wallet(PRIVATE_KEY_TEST_NEVER_USE, provider)
       win.ethereum = new CustomizedBridge(signer, provider)
-    }
+    },
   })
 })

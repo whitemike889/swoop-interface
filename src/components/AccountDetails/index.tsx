@@ -30,7 +30,7 @@ const HeaderRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
   padding: 1rem 1rem;
   font-weight: 500;
-  color: ${props => (props.color === 'blue' ? ({ theme }) => theme.primary1 : 'inherit')};
+  color: ${(props) => (props.color === 'blue' ? ({ theme }) => theme.primary1 : 'inherit')};
   ${({ theme }) => theme.mediaWidth.upToMedium`
     padding: 1rem;
   `};
@@ -227,9 +227,9 @@ export default function AccountDetails({
   pendingTransactions,
   confirmedTransactions,
   ENSName,
-  openOptions
+  openOptions,
 }: AccountDetailsProps) {
-  const { userWallet, account, chainId, wrapper, bech32Address } = useActiveHmyReact();
+  const { userWallet, account, chainId, wrapper, bech32Address } = useActiveHmyReact()
   const theme = useContext(ThemeContext)
   const dispatch = useDispatch<AppDispatch>()
 
@@ -238,30 +238,30 @@ export default function AccountDetails({
   const connector = useUserActiveWallet()
 
   function formatConnectorName() {
-
-    let name = '';
+    let name = ''
 
     if (userWallet && userWallet.type != null && userWallet.type !== '') {
       switch (userWallet.type.toLowerCase()) {
         case 'onewallet':
-          name = 'OneWallet';
-          break;
+          name = 'OneWallet'
+          break
         case 'mathwallet':
-          name = 'MathWallet';
-          break;
+          name = 'MathWallet'
+          break
         default:
-          name = '';
+          name = ''
       }
     } else {
       const { ethereum } = window
       const isMetaMask = !!(ethereum && ethereum.isMetaMask)
-  
+
       name = Object.keys(SUPPORTED_WALLETS)
         .filter(
-          k =>
-            SUPPORTED_WALLETS[k].connector === connector && (connector !== injected || isMetaMask === (k === 'METAMASK'))
+          (k) =>
+            SUPPORTED_WALLETS[k].connector === connector &&
+            (connector !== injected || isMetaMask === (k === 'METAMASK'))
         )
-        .map(k => SUPPORTED_WALLETS[k].name)[0]
+        .map((k) => SUPPORTED_WALLETS[k].name)[0]
     }
 
     return <WalletName>Connected with {name}</WalletName>
@@ -269,7 +269,7 @@ export default function AccountDetails({
 
   const tryDeactivation = async (connector: AbstractWallet | undefined) => {
     let name = ''
-    Object.keys(SUPPORTED_WALLETS).map(key => {
+    Object.keys(SUPPORTED_WALLETS).map((key) => {
       if (connector === SUPPORTED_WALLETS[key].connector) {
         return (name = SUPPORTED_WALLETS[key].name)
       }
@@ -280,17 +280,19 @@ export default function AccountDetails({
     ReactGA.event({
       category: 'Wallet',
       action: 'Signout Wallet',
-      label: name
+      label: name,
     })
 
-    connector && connector.signOut()
-    .then(() => {
-      setUserWallet({} as UserWallet);
-      toggleWalletModal();
-    })
-    .catch(error => {
-      toggleWalletModal();
-    });
+    connector &&
+      connector
+        .signOut()
+        .then(() => {
+          setUserWallet({} as UserWallet)
+          toggleWalletModal()
+        })
+        .catch((error) => {
+          toggleWalletModal()
+        })
   }
 
   function getStatusIcon() {
@@ -358,7 +360,7 @@ export default function AccountDetails({
                     <WalletAction
                       style={{ fontSize: '.825rem', fontWeight: 400, marginRight: '8px' }}
                       onClick={() => {
-                        tryDeactivation(connector);
+                        tryDeactivation(connector)
                       }}
                     >
                       Disconnect

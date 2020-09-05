@@ -1,4 +1,4 @@
-import { Currency, Percent, Price } from '@swoop-exchange/sdk'
+import { Currency, Percent, Price } from '@harmony-swoop/sdk'
 import React, { useContext } from 'react'
 import { Text } from 'rebass'
 import { ThemeContext } from 'styled-components'
@@ -12,7 +12,7 @@ export function PoolPriceBar({
   currencies,
   noLiquidity,
   poolTokenPercentage,
-  price
+  price,
 }: {
   currencies: { [field in Field]?: Currency }
   noLiquidity?: boolean

@@ -70,9 +70,7 @@ export class MathWallet extends AbstractWallet {
   }
 
   private initWallet() {
-    // @ts-ignore
     this.isMathWallet = window.harmony && window.harmony.isMathWallet
-    // @ts-ignore
     this.mathwallet = window.harmony
   }
 
@@ -117,7 +115,6 @@ export class MathWallet extends AbstractWallet {
       try {
         tx.from = this.address
 
-        // @ts-ignore
         const signTx = await this.signTransaction(tx)
 
         return signTx

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom'
-import { Token, TokenAmount, WONE } from '@swoop-exchange/sdk'
+import { Token, TokenAmount, WONE } from '@harmony-swoop/sdk'
 import { Text } from 'rebass'
 import { AutoColumn } from '../Column'
 import { ButtonSecondary } from '../Button'
@@ -19,9 +19,8 @@ interface PositionCardProps extends RouteComponentProps<{}> {
 function V1PositionCard({ token, V1LiquidityBalance }: PositionCardProps) {
   const theme = useContext(ThemeContext)
 
-  const { chainId } = useActiveHmyReact();
-  // @ts-ignore
-  var wone: any = WONE[chainId];
+  const { chainId } = useActiveHmyReact()
+  const wone: any = WONE[chainId]
 
   return (
     <HoverCard>
