@@ -5,7 +5,7 @@ import { useAllTokens } from '../../hooks/Tokens'
 import { useMulticallContract } from '../../hooks/useContract'
 import { isAddress } from '../../utils'
 import { useSingleContractMultipleData, useMultipleContractSingleData } from '../multicall/hooks'
-
+import {MULTICALL_INTERFACE} from '../../constants/multicall/index';
 import { useActiveHmyReact } from '../../hooks'
 
 /**
@@ -30,7 +30,9 @@ export function useETHBalances(
   const results = useSingleContractMultipleData(
     multicallContract,
     'getEthBalance',
-    addresses.map(address => [address])
+    addresses.map(address => [address]),
+    undefined,
+    MULTICALL_INTERFACE
   )
 
   const res = useMemo(

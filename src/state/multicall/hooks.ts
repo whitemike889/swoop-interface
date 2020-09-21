@@ -164,12 +164,15 @@ export function useSingleContractMultipleData(
   contract: any | null | undefined,
   methodName: string,
   callInputs: OptionalMethodInputs[],
-  options?: ListenerOptions
+  options?: ListenerOptions,
+  contractInterface?: Interface
 ): CallState[] {
   // TODO: update this to use hmy's contract interaction version
 
-  // todo put it to eth hook
-  const contractInterface = MULTICALL_INTERFACE
+  if (!contractInterface) {
+    console.error('useSingleContractMultipleData no contractInterface ', {methodName, callInputs})
+  }
+
   const fragment = useMemo(() => contractInterface.getFunction(methodName), [contract, methodName])
 
   const calls = useMemo(
