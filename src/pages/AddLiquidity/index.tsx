@@ -99,7 +99,7 @@ export default function AddLiquidity({
       addPair(pair);
       setCanAddPair(false)
     }
-  }, [pair, addPair, canAddPair]);
+  }, [pair, addPair]);
 
   // get formatted amounts
   const formattedAmounts = {
