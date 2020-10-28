@@ -95,7 +95,7 @@ export default function AddLiquidity({
   const addPair = usePairAdder();
   useEffect(() => {
     //if (noLiquidity && canAddPair) {
-    if (canAddPair) {
+    if (canAddPair && pair?.token0 && pair?.token1) {
       addPair(pair);
       setCanAddPair(false)
     }
