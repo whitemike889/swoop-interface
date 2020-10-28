@@ -24,13 +24,13 @@ export enum ApprovalState {
 
 type approvedTokens = Record<string, boolean>
 
-const makeHashFromCurrencyAmount = (currencyAmount: CurrencyAmount | undefined) => {
+/*const makeHashFromCurrencyAmount = (currencyAmount: CurrencyAmount | undefined) => {
   if (!(currencyAmount instanceof TokenAmount)) {
      return ''
   }
 
   return currencyAmount.denominator.toString() + currencyAmount.currency.symbol
-}
+}*/
 
 // returns a variable indicating the state of the approval and a function which approves if necessary or early returns
 export function useApproveCallback(
@@ -118,7 +118,7 @@ export function useApproveCallback(
         console.debug('Failed to approve token', error)
         throw error
       })
-  }, [approvalState, token, tokenContract, amountToApprove, spender, wrapper, addTransaction,  approveTxSent])
+  }, [approvalState, token, tokenContract, amountToApprove, spender, wrapper, addTransaction])
 
   return [approvalState, approve]
 }
