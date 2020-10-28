@@ -2466,9 +2466,9 @@
     "@types/lodash" "*"
 
 "@types/lodash@*":
-  version "4.14.162"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.162.tgz#65d78c397e0d883f44afbf1f7ba9867022411470"
-  integrity sha512-alvcho1kRUnnD1Gcl4J+hK0eencvzq9rmzvFPRmP5rPHx9VVsJj6bKLTATPVf9ktgv4ujzh7T+XWKp+jhuODig==
+  version "4.14.163"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.163.tgz#6026f73c8267a0b7d41c7c8aadacfa2a5255774f"
+  integrity sha512-BeZM/FZaV53emqyHxn9L39Oz6XbHMBRLA1b1quROku48J/1kYYxPmVOJ/qSQheb81on4BI7H6QDo6bkUuRaDNQ==
 
 "@types/minimatch@*":
   version "3.0.3"
@@ -2483,14 +2483,14 @@
     "@types/node" "*"
 
 "@types/node@*":
-  version "14.14.5"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.5.tgz#e92d3b8f76583efa26c1a63a21c9d3c1143daa29"
-  integrity sha512-H5Wn24s/ZOukBmDn03nnGTp18A60ny9AmCwnEcgJiTgSGsCO7k+NWP7zjCCbhlcnVCoI+co52dUAt9GMhOSULw==
+  version "14.14.6"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.6.tgz#146d3da57b3c636cc0d1769396ce1cfa8991147f"
+  integrity sha512-6QlRuqsQ/Ox/aJEQWBEJG7A9+u7oSYl3mem/K8IzxXG/kAGbV1YPD9Bg9Zw3vyxC/YP+zONKwy8hGkSt1jxFMw==
 
 "@types/node@^13.13.5":
-  version "13.13.29"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.13.29.tgz#2d9362387bd125f02fb111e8fc81cca8e9aaa5b2"
-  integrity sha512-WPGpyEDx4/F4Rx1p1Zar8m+JsMxpSY/wNFPlyNXWV+UzJwkYt3LQg2be/qJgpsLdVJsfxTR5ipY6rv2579jStQ==
+  version "13.13.30"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.13.30.tgz#1ed6e01e4ca576d5aec9cc802cc3bcf94c274192"
+  integrity sha512-HmqFpNzp3TSELxU/bUuRK+xzarVOAsR00hzcvM0TXrMlt/+wcSLa5q6YhTb6/cA6wqDCZLDcfd8fSL95x5h7AA==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -2575,9 +2575,9 @@
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^16.9.34":
-  version "16.9.54"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.54.tgz#140280c31825287ee74e9da95285b91c5a2e471d"
-  integrity sha512-GhawhYraQZpGFO2hVMArjPrYbnA/6+DS8SubK8IPhhVClmKqANihsRenOm5E0mvqK0m/BKoqVktA1O1+Xvlz9w==
+  version "16.9.55"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.55.tgz#47078587f5bfe028a23b6b46c7b94ac0d436acff"
+  integrity sha512-6KLe6lkILeRwyyy7yG9rULKJ0sXplUsl98MGoCfpteXf9sPWFWWMknDcsvubcpaTdBuxtsLF6HDUwdApZL/xIg==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
@@ -15193,9 +15193,9 @@ uuid@^3.3.2, uuid@^3.4.0:
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
 v8-compile-cache@^2.0.3:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.1.1.tgz#54bc3cdd43317bca91e35dcaf305b1a7237de745"
-  integrity sha512-8OQ9CL+VWyt3JStj7HX7/ciTL2V3Rl1Wf5OL+SNTm0yK1KvtReVulksyeRnCANHHuUxHlQig+JJDlUhBt1NQDQ==
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.2.0.tgz#9471efa3ef9128d2f7c6a7ca39c4dd6b5055b132"
+  integrity sha512-gTpR5XQNKFwOd4clxfnhaqvfqMpqEwr4tOtCyz4MtYZX2JYhfr1JvBFKdS+7K/9rfpZR3VLX+YWBbKoxCgS43Q==
 
 validate-npm-package-license@^3.0.1:
   version "3.0.4"
