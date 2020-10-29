@@ -2309,10 +2309,10 @@
   resolved "https://registry.yarnpkg.com/@swoop-exchange/core/-/core-1.1.0.tgz#a9d5a5ec45748eb38be66445f681cdc7bd9ad148"
   integrity sha512-t3+kCHdBpZ3hByjBjFLHGKpxYlYB+u+72NzUPAzdJpFnTlNAO52rLg+tMytAilrUX9lSLS7v+S0qOZ042PoZXQ==
 
-"@swoop-exchange/default-token-list@=1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@swoop-exchange/default-token-list/-/default-token-list-1.1.0.tgz#bc9507fdf4cec6b947e84d09b7ff5bddc2cb872b"
-  integrity sha512-e6YWJPSE3I31EnDNenPJlYRkFeK9F31fGvlPKUvbqpmXT2aMZrDXFXnjRKuHg54Fg/g6es/YELr561WHzuSgrg==
+"@swoop-exchange/default-token-list@=1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@swoop-exchange/default-token-list/-/default-token-list-1.3.0.tgz#de0fb87800f82b09fce2579d8d7c6460eed7c7f8"
+  integrity sha512-0omrHNzK8HDnoP1igbgkk1J4dNTvK+4jIZko6Tz0bVyx+KpolYiqLIbtCTRpnzkDe0ASQw6w2XOAao/x4clEjA==
 
 "@swoop-exchange/periphery@=1.0.1":
   version "1.0.1"
