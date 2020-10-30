@@ -37,7 +37,7 @@ const Wrapper = styled(AutoColumn)<{ showBackground: boolean; bgColor: any }>`
   position: relative;
   opacity: ${({ showBackground }) => (showBackground ? '1' : '1')};
   background: ${({ theme, bgColor, showBackground }) =>
-  `radial-gradient(91.85% 100% at 1.84% 0%, ${bgColor} 0%, ${showBackground ? theme.black : theme.bg5} 100%) `};
+  `radial-gradient(91.85% 100% at 1.84% 10%, ${bgColor} 10%, ${showBackground ? 'rgb(34, 37, 24)' : theme.bg5} 100%) `};
   color: ${({ theme, showBackground }) => (showBackground ? theme.white : theme.text1)} !important;
 
   ${({ showBackground }) =>
@@ -91,7 +91,7 @@ export default function PoolCard({ stakingInfo, index }: { stakingInfo: any, ind
   const token = currency0 === WONE[chainId] ? token1 : token0
   const WETH = currency0 === WONE[chainId] ? token0 : token1
 
-  const palette = [ 'yellow', 'lightgreen', 'cyan']
+  const palette = [ 'purple', 'lightgreen', 'cyan']
   const backgroundColor = palette[index]//useColor(token0)
 
   const totalSupplyOfStakingToken = useTotalSupply(stakingInfo.stakedAmount.token)
