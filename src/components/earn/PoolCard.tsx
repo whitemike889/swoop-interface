@@ -5,9 +5,9 @@ import styled from 'styled-components'
 import { TYPE, StyledInternalLink } from '../../theme'
 import DoubleCurrencyLogo from '../DoubleLogo'
 //import { ETHER, JSBI, TokenAmount } from '@swoop-exchange/sdk'
-import {WONE, JSBI, TokenAmount } from '@swoop-exchange/sdk'
+import {WONE, JSBI, TokenAmount, Token } from '@swoop-exchange/sdk'
 import { ButtonPrimary } from '../Button'
-import { StakingInfo } from '../../state/stake/hooks'
+// import { StakingInfo } from '../../state/stake/hooks'
 import { useColor } from '../../hooks/useColor'
 import { currencyId } from '../../utils/currencyId'
 import { Break, CardNoise, CardBGImage } from './styled'
@@ -73,7 +73,9 @@ const BottomSection = styled.div<{ showBackground: boolean }>`
   z-index: 1;
 `
 
-export default function PoolCard({ stakingInfo }: { stakingInfo: StakingInfo }) {
+// any StakingInfo
+export default function PoolCard({ stakingInfo }: { stakingInfo: any }) {
+
   const token0 = stakingInfo.tokens[0]
   const token1 = stakingInfo.tokens[1]
 
@@ -86,7 +88,7 @@ export default function PoolCard({ stakingInfo }: { stakingInfo: StakingInfo }) 
   // todo chainId
   const token = currency0 === WONE[1] ? token1 : token0
   const WETH = currency0 === WONE[1] ? token0 : token1
-  const backgroundColor = useColor(token)
+  const backgroundColor = useColor(token0)
 
   const totalSupplyOfStakingToken = useTotalSupply(stakingInfo.stakedAmount.token)
   const [, stakingTokenPair] = usePair(...stakingInfo.tokens)
@@ -108,7 +110,8 @@ export default function PoolCard({ stakingInfo }: { stakingInfo: StakingInfo }) 
   }
 
   // get the USD value of staked WETH
-  const USDPrice = useUSDCPrice(WETH)
+  const USDPrice = undefined //useUSDCPrice(WETH)
+
   const valueOfTotalStakedAmountInUSDC =
     valueOfTotalStakedAmountInWETH && USDPrice?.quote(valueOfTotalStakedAmountInWETH)
 
@@ -123,11 +126,11 @@ export default function PoolCard({ stakingInfo }: { stakingInfo: StakingInfo }) 
           {currency0.symbol}-{currency1.symbol}
         </TYPE.white>
 
-        <StyledInternalLink to={`/uni/${currencyId(currency0)}/${currencyId(currency1)}`} style={{ width: '100%' }}>
+      {/*  <StyledInternalLink to={`/uni/${currencyId(currency0)}/${currencyId(currency1)}`} style={{ width: '100%' }}>
           <ButtonPrimary padding="8px" borderRadius="8px">
             {isStaking ? 'Manage' : 'Deposit'}
           </ButtonPrimary>
-        </StyledInternalLink>
+        </StyledInternalLink>*/}
       </TopSection>
 
       <StatContainer>
@@ -140,10 +143,10 @@ export default function PoolCard({ stakingInfo }: { stakingInfo: StakingInfo }) 
           </TYPE.white>
         </RowBetween>
         <RowBetween>
-          <TYPE.white> Pool rate </TYPE.white>
+          {/*<TYPE.white> Pool rate </TYPE.white>
           <TYPE.white>{`${stakingInfo.totalRewardRate
             ?.multiply(`${60 * 60 * 24 * 7}`)
-            ?.toFixed(0, { groupSeparator: ',' })} UNI / week`}</TYPE.white>
+            ?.toFixed(0, { groupSeparator: ',' })} SWP / week`}</TYPE.white>*/}
         </RowBetween>
       </StatContainer>
 
@@ -151,18 +154,18 @@ export default function PoolCard({ stakingInfo }: { stakingInfo: StakingInfo }) 
         <>
           <Break />
           <BottomSection showBackground={true}>
-            <TYPE.black color={'white'} fontWeight={500}>
+           {/* <TYPE.black color={'white'} fontWeight={500}>
               <span>Your rate</span>
-            </TYPE.black>
+            </TYPE.black>*/}
 
-            <TYPE.black style={{ textAlign: 'right' }} color={'white'} fontWeight={500}>
+          {/*  <TYPE.black style={{ textAlign: 'right' }} color={'white'} fontWeight={500}>
               <span role="img" aria-label="wizard-icon" style={{ marginRight: '0.5rem' }}>
                 ⚡
               </span>
               {`${stakingInfo.rewardRate
                 ?.multiply(`${60 * 60 * 24 * 7}`)
-                ?.toSignificant(4, { groupSeparator: ',' })} UNI / week`}
-            </TYPE.black>
+                ?.toSignificant(4, { groupSeparator: ',' })} SWP / week`}
+            </TYPE.black>*/}
           </BottomSection>
         </>
       )}

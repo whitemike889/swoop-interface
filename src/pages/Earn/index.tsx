@@ -9,6 +9,7 @@ import { CardSection, DataCard, CardNoise, CardBGImage } from '../../components/
 import { Countdown } from './Countdown'
 import Loader from '../../components/Loader'
 import { useActiveWeb3React } from '../../hooks'
+import {Token, TokenAmount} from '@swoop-exchange/sdk';
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
@@ -29,10 +30,101 @@ const PoolSection = styled.div`
   justify-self: center;
 `
 
+// todo double for stake/hooks
+export interface StakingInfo {
+  // the address of the reward contract
+  stakingRewardAddress: string
+  // the tokens involved in this pair
+  tokens: [Token, Token]
+  // the amount of token currently staked, or undefined if no account
+  stakedAmount: TokenAmount
+  // the amount of reward token earned by the active account, or undefined if no account
+  earnedAmount: TokenAmount
+  // the total amount of token staked in the contract
+  totalStakedAmount: TokenAmount
+  // the amount of token distributed per second to all LPs, constant
+  totalRewardRate: TokenAmount
+  // the current amount of token distributed to the active account per second.
+  // equivalent to percent of total supply * reward rate
+  rewardRate: TokenAmount
+  // when the period ends
+  periodFinish: Date | undefined
+  // calculates a hypothetical amount of token distributed to the active account per second.
+  getHypotheticalRewardRate: (
+    stakedAmount: TokenAmount,
+    totalStakedAmount: TokenAmount,
+    totalRewardRate: TokenAmount
+  ) => TokenAmount
+}// todo double for stake/hooks
+export interface StakingInfo {
+  // the address of the reward contract
+  stakingRewardAddress: string
+  // the tokens involved in this pair
+  tokens: [Token, Token]
+  // the amount of token currently staked, or undefined if no account
+  stakedAmount: TokenAmount
+  // the amount of reward token earned by the active account, or undefined if no account
+  earnedAmount: TokenAmount
+  // the total amount of token staked in the contract
+  totalStakedAmount: TokenAmount
+  // the amount of token distributed per second to all LPs, constant
+  totalRewardRate: TokenAmount
+  // the current amount of token distributed to the active account per second.
+  // equivalent to percent of total supply * reward rate
+  rewardRate: TokenAmount
+  // when the period ends
+  periodFinish: Date | undefined
+  // calculates a hypothetical amount of token distributed to the active account per second.
+  getHypotheticalRewardRate: (
+    stakedAmount: TokenAmount,
+    totalStakedAmount: TokenAmount,
+    totalRewardRate: TokenAmount
+  ) => TokenAmount
+}
+
 export default function Earn() {
   const { chainId } = useActiveWeb3React()
   //const stakingInfos = useStakingInfo()
-  const stakingInfos = []
+  const tmpToken = new Token(1, '0xF720b7910C6b2FF5bd167171aDa211E226740bfe', 18,'AAA', 'AAA')
+ const stakingInfos: StakingInfo[] = [
+    {
+      stakingRewardAddress: '0xF720b7910C6b2FF5bd167171aDa211E226740bfe',
+      tokens: [
+        new Token(1, '0xF720b7910C6b2FF5bd167171aDa211E226740bfe', 18,'1WBTC', '1WBTC'),
+        new Token(1, '0x218532a12a389a4a92fC0C5Fb22901D1c19198aA', 18, '1ETH', '1ETH')
+      ],
+      stakedAmount: new TokenAmount(tmpToken, '10'),
+      // the amount of reward token earned by the active account, or undefined if no account
+      earnedAmount: new TokenAmount(tmpToken, '10'),
+      // the total amount of token staked in the contract
+      totalStakedAmount: new TokenAmount(tmpToken, '10'),
+      // the amount of token distributed per second to all LPs, constant
+      totalRewardRate: new TokenAmount(tmpToken, '10'),
+      rewardRate: new TokenAmount(tmpToken, '10'),
+      getHypotheticalRewardRate: (...a) => new TokenAmount(tmpToken, '0'),
+      periodFinish: undefined
+    },
+
+
+   {
+     stakingRewardAddress: '0xF720b7910C6b2FF5bd167171aDa211E226740bfe',
+     tokens: [
+       new Token(1, '0xF720b7910C6b2FF5bd167171aDa211E226740bfe', 18,'LINK', 'LINK'),
+       new Token(1, '0x218532a12a389a4a92fC0C5Fb22901D1c19198aA', 18, '1ETH', '1ETH')
+     ],
+     stakedAmount: new TokenAmount(tmpToken, '10'),
+     // the amount of reward token earned by the active account, or undefined if no account
+     earnedAmount: new TokenAmount(tmpToken, '10'),
+     // the total amount of token staked in the contract
+     totalStakedAmount: new TokenAmount(tmpToken, '10'),
+     // the amount of token distributed per second to all LPs, constant
+     totalRewardRate: new TokenAmount(tmpToken, '10'),
+     rewardRate: new TokenAmount(tmpToken, '10'),
+     getHypotheticalRewardRate: (...a) => new TokenAmount(tmpToken, '0'),
+     periodFinish: undefined
+   }
+  ]
+
 
   const DataRow = styled(RowBetween)`
     ${({ theme }) => theme.mediaWidth.upToSmall`
@@ -41,7 +133,7 @@ export default function Earn() {
   `
 
   //const stakingRewardsExist = Boolean(typeof chainId === 'number' && (STAKING_REWARDS_INFO[chainId]?.length ?? 0) > 0)
-  const stakingRewardsExist = false
+  const stakingRewardsExist = true
 
   return (
     <PageWrapper gap="lg" justify="center">
@@ -52,19 +144,19 @@ export default function Earn() {
           <CardSection>
             <AutoColumn gap="md">
               <RowBetween>
-                <TYPE.white fontWeight={600}>Uniswap liquidity mining</TYPE.white>
+                <TYPE.white fontWeight={600}>Swoop liquidity mining</TYPE.white>
               </RowBetween>
               <RowBetween>
                 <TYPE.white fontSize={14}>
-                  Deposit your Liquidity Provider tokens to receive UNI, the Uniswap protocol governance token.
+                  Adding liquidity to the below will earn you rewards.
                 </TYPE.white>
               </RowBetween>{' '}
               <ExternalLink
                 style={{ color: 'white', textDecoration: 'underline' }}
-                href="https://uniswap.org/blog/uni/"
+                href=""
                 target="_blank"
               >
-                <TYPE.white fontSize={14}>Read more about UNI</TYPE.white>
+                <TYPE.white fontSize={14}>Read more about SWOOP</TYPE.white>
               </ExternalLink>
             </AutoColumn>
           </CardSection>

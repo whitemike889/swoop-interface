@@ -1,3 +1,4 @@
+/*
 import {  CurrencyAmount, JSBI, Token, TokenAmount, WONE, Pair } from '@swoop-exchange/sdk'
 import { useMemo } from 'react'
 import { DAI, USDC, USDT  } from '../../constants'
@@ -12,7 +13,7 @@ export const REWARDS_DURATION_DAYS = 60
 
 // TODO add staking rewards addresses here
 
-/*export const STAKING_REWARDS_INFO: {
+/!*export const STAKING_REWARDS_INFO: {
   [chainId in ChainId]?: {
     tokens: [Token, Token]
     stakingRewardAddress: string
@@ -36,7 +37,7 @@ export const REWARDS_DURATION_DAYS = 60
       stakingRewardAddress: '0xCA35e32e7926b96A9988f61d510E038108d8068e'
     }*!/
   ]
-}*/
+}*!/
 
 export interface StakingInfo {
   // the address of the reward contract
@@ -264,4 +265,6 @@ export function useDerivedUnstakeInfo(
     parsedAmount,
     error
   }
-}
+}*/
+
+export {}

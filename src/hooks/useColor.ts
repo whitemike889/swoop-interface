@@ -10,11 +10,12 @@ async function getColorFromToken(token: Token): Promise<string | null> {
     return Promise.resolve('#FAAB14')
   }*/
 
-  const path = `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${token.address}/logo.png`
+  const path = `https://swoop-exchange.s3-us-west-1.amazonaws.com/tokens/${token.symbol}.png`
 
   return Vibrant.from(path)
     .getPalette()
     .then(palette => {
+      console.log({palette})
       if (palette?.Vibrant) {
         let detectedHex = palette.Vibrant.hex
         let AAscore = hex(detectedHex, '#FFF')

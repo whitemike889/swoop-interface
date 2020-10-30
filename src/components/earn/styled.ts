@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { AutoColumn } from '../Column'
 
-import uImage from '../../assets/images/big_unicorn.png'
-import xlUnicorn from '../../assets/images/xl_uni.png'
+// import uImage from '../../assets/images/big_unicorn.png'
+//import xlUnicorn from '../../assets/images/xl_uni.png'
 import noise from '../../assets/images/noise.png'
 
 export const TextBox = styled.div`
@@ -24,8 +24,8 @@ export const DataCard = styled(AutoColumn)<{ disabled?: boolean }>`
   overflow: hidden;
 `
 
+//background: url(${uImage});
 export const CardBGImage = styled.span<{ desaturate?: boolean }>`
-  background: url(${uImage});
   width: 1000px;
   height: 600px;
   position: absolute;
@@ -39,8 +39,8 @@ export const CardBGImage = styled.span<{ desaturate?: boolean }>`
   ${({ desaturate }) => desaturate && `filter: saturate(0)`}
 `
 
+//background: url(${xlUnicorn});
 export const CardBGImageSmaller = styled.span<{ desaturate?: boolean }>`
-  background: url(${xlUnicorn});
   width: 1200px;
   height: 1200px;
   position: absolute;
@@ -53,8 +53,9 @@ export const CardBGImageSmaller = styled.span<{ desaturate?: boolean }>`
   ${({ desaturate }) => desaturate && `filter: saturate(0)`}
 `
 
+
 export const CardNoise = styled.span`
-  background: url(${noise});
+  background: url(${noise}); 
   background-size: cover;
   mix-blend-mode: overlay;
   border-radius: 12px;
