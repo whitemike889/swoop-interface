@@ -15,6 +15,7 @@ import { unwrappedToken } from '../../utils/wrappedCurrency'
 import { useTotalSupply } from '../../data/TotalSupply'
 import { usePair } from '../../data/Reserves'
 import useUSDCPrice from '../../utils/useUSDCPrice'
+import {useActiveHmyReact} from '../../hooks';
 
 const StatContainer = styled.div`
   display: flex;
@@ -74,7 +75,8 @@ const BottomSection = styled.div<{ showBackground: boolean }>`
 `
 
 // any StakingInfo
-export default function PoolCard({ stakingInfo }: { stakingInfo: any }) {
+export default function PoolCard({ stakingInfo, index }: { stakingInfo: any, index: number }) {
+  const { chainId } = useActiveHmyReact()
 
   const token0 = stakingInfo.tokens[0]
   const token1 = stakingInfo.tokens[1]
@@ -86,9 +88,11 @@ export default function PoolCard({ stakingInfo }: { stakingInfo: any }) {
 
   // get the color of the token
   // todo chainId
-  const token = currency0 === WONE[1] ? token1 : token0
-  const WETH = currency0 === WONE[1] ? token0 : token1
-  const backgroundColor = useColor(token0)
+  const token = currency0 === WONE[chainId] ? token1 : token0
+  const WETH = currency0 === WONE[chainId] ? token0 : token1
+
+  const palette = [ 'yellow', 'lightgreen', 'cyan']
+  const backgroundColor = palette[index]//useColor(token0)
 
   const totalSupplyOfStakingToken = useTotalSupply(stakingInfo.stakedAmount.token)
   const [, stakingTokenPair] = usePair(...stakingInfo.tokens)
@@ -126,22 +130,27 @@ export default function PoolCard({ stakingInfo }: { stakingInfo: any }) {
           {currency0.symbol}-{currency1.symbol}
         </TYPE.white>
 
-      {/*  <StyledInternalLink to={`/uni/${currencyId(currency0)}/${currencyId(currency1)}`} style={{ width: '100%' }}>
-          <ButtonPrimary padding="8px" borderRadius="8px">
+      {  <StyledInternalLink to={`/swap/${currencyId(currency0)}/${currencyId(currency1)}`} style={{ width: '100%' }}>
+         {/* <ButtonPrimary padding="8px" borderRadius="8px">
             {isStaking ? 'Manage' : 'Deposit'}
-          </ButtonPrimary>
-        </StyledInternalLink>*/}
+          </ButtonPrimary>*/}
+        </StyledInternalLink>}
       </TopSection>
 
       <StatContainer>
-        <RowBetween>
+        {<RowBetween>
           <TYPE.white> Total deposited</TYPE.white>
           <TYPE.white>
+            {stakingTokenPair ? stakingTokenPair.reserve0.toSignificant(6) : '-'}&nbsp;{token0.symbol}<br/>
+            {stakingTokenPair ? stakingTokenPair.reserve1.toSignificant(6) : '-'}&nbsp;{token1.symbol}
+          </TYPE.white>
+
+        {/*  <TYPE.white>
             {valueOfTotalStakedAmountInUSDC
               ? `$${valueOfTotalStakedAmountInUSDC.toFixed(0, { groupSeparator: ',' })}`
               : `${valueOfTotalStakedAmountInWETH?.toSignificant(4, { groupSeparator: ',' }) ?? '-'} ETH`}
-          </TYPE.white>
-        </RowBetween>
+          </TYPE.white>*/}
+        </RowBetween>}
         <RowBetween>
           {/*<TYPE.white> Pool rate </TYPE.white>
           <TYPE.white>{`${stakingInfo.totalRewardRate
@@ -150,7 +159,7 @@ export default function PoolCard({ stakingInfo }: { stakingInfo: any }) {
         </RowBetween>
       </StatContainer>
 
-      {isStaking && (
+      {false && isStaking && (
         <>
           <Break />
           <BottomSection showBackground={true}>
