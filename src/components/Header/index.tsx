@@ -20,6 +20,7 @@ import Web3Status from '../Web3Status'
 //import VersionSwitch from './VersionSwitch'
 
 import { useActiveHmyReact } from '../../hooks'
+import {NavLink} from 'react-router-dom';
 
 const { ChainID } = require("@harmony-js/utils");
 
@@ -167,6 +168,7 @@ export default function Header() {
               <img height="16" style={{ marginLeft: '4px', marginTop: '-4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" />
             </TitleText>
           </Title>
+          <NavLink style={{color: 'white', textDecoration: 'none'}} to={'/poollist'}>Pools</NavLink>
         </HeaderElement>
         <HeaderControls>
           <HeaderElement>
