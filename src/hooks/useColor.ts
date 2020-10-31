@@ -10,7 +10,7 @@ async function getColorFromToken(token: Token): Promise<string | null> {
     return Promise.resolve('#FAAB14')
   }*/
 
-  const path = `https://swoop-exchange.s3-us-west-1.amazonaws.com/tokens/${token.symbol}.png`
+  //const path = `https://swoop-exchange.s3-us-west-1.amazonaws.com/tokens/${token.symbol}.png`
   return null
  /* return Vibrant.from(path)
     .getPalette()
