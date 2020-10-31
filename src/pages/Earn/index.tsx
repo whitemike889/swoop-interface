@@ -10,6 +10,7 @@ import {Countdown} from './Countdown';
 import Loader from '../../components/Loader';
 import {useActiveHmyReact, useActiveWeb3React} from '../../hooks';
 import {Token, TokenAmount} from '@swoop-exchange/sdk';
+import {useAllTokens} from '../../hooks/Tokens';
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
@@ -82,67 +83,43 @@ export interface StakingInfo {
   ) => TokenAmount
 }
 
+const makeStakingInfo = (token0, token1) => {
+  const randomAmount = new TokenAmount(token0, '10')
+  return  {
+    stakingRewardAddress: '',
+    tokens: [
+      token0,
+      token1
+    ],
+    stakedAmount: randomAmount,
+    // the amount of reward token earned by the active account, or undefined if no account
+    earnedAmount: randomAmount,
+    // the total amount of token staked in the contract
+    totalStakedAmount: randomAmount,
+    // the amount of token distributed per second to all LPs, constant
+    totalRewardRate: randomAmount,
+    rewardRate: randomAmount,
+    getHypotheticalRewardRate: (...a) => randomAmount,
+    periodFinish: undefined,
+  }
+}
+
 export default function Earn() {
   const {chainId} = useActiveHmyReact();
 
-  //const stakingInfos = useStakingInfo()
-  const tmpToken = new Token(chainId, '0x7466d7d0C21Fa05F32F5a0Fa27e12bdC06348Ce2', 18, 'WONE', 'WONE');
-  const tmpToken2 = new Token(chainId, '0x2C6e26B2faD89bc52d043e78E3D980A08af0Ce88', 18, '1LINK', '1LINK');
-  const tmpToken3 = new Token(chainId, '0x3095c7557bCb296ccc6e363DE01b760bA031F2d9', 18, '1BTC', '1BTC');
+  const AllTokens = useAllTokens()
 
-  const stakingInfos: StakingInfo[] = [
-    {
-      stakingRewardAddress: '0xF720b7910C6b2FF5bd167171aDa211E226740bfe',
-      tokens: [
-        new Token(chainId, '0x7466d7d0C21Fa05F32F5a0Fa27e12bdC06348Ce2', 18, 'WONE', 'WONE'),
-        new Token(chainId, '0x0E80905676226159cC3FF62B1876C907C91F7395', 18, '1BUSD', '1BUSD'),
-      ],
-      stakedAmount: new TokenAmount(tmpToken, '10'),
-      // the amount of reward token earned by the active account, or undefined if no account
-      earnedAmount: new TokenAmount(tmpToken, '10'),
-      // the total amount of token staked in the contract
-      totalStakedAmount: new TokenAmount(tmpToken, '10'),
-      // the amount of token distributed per second to all LPs, constant
-      totalRewardRate: new TokenAmount(tmpToken, '10'),
-      rewardRate: new TokenAmount(tmpToken, '10'),
-      getHypotheticalRewardRate: (...a) => new TokenAmount(tmpToken, '0'),
-      periodFinish: undefined,
-    },
-    {
-      stakingRewardAddress: '0xF720b7910C6b2FF5bd167171aDa211E226740bfe',
-      tokens: [
-        new Token(chainId, '0x2C6e26B2faD89bc52d043e78E3D980A08af0Ce88', 18, '1LINK', '1LINK'),
-        new Token(chainId, '0x1E120B3b4aF96e7F394ECAF84375b1C661830013', 18, '1ETH', '1ETH'),
-      ],
-      stakedAmount: new TokenAmount(tmpToken2, '10'),
-      // the amount of reward token earned by the active account, or undefined if no account
-      earnedAmount: new TokenAmount(tmpToken2, '10'),
-      // the total amount of token staked in the contract
-      totalStakedAmount: new TokenAmount(tmpToken2, '10'),
-      // the amount of token distributed per second to all LPs, constant
-      totalRewardRate: new TokenAmount(tmpToken2, '10'),
-      rewardRate: new TokenAmount(tmpToken2, '10'),
-      getHypotheticalRewardRate: (...a) => new TokenAmount(tmpToken2, '0'),
-      periodFinish: undefined,
-    },
-    {
-      stakingRewardAddress: '0x3095c7557bCb296ccc6e363DE01b760bA031F2d9',
-      tokens: [
-        new Token(chainId, '0x3095c7557bCb296ccc6e363DE01b760bA031F2d9', 18, '1WBTC', '1WBTC'),
-        new Token(chainId, '0xF720b7910C6b2FF5bd167171aDa211E226740bfe', 18, '1WETH', '1WETH'),
-      ],
-      stakedAmount: new TokenAmount(tmpToken3, '10'),
-      // the amount of reward token earned by the active account, or undefined if no account
-      earnedAmount: new TokenAmount(tmpToken3, '10'),
-      // the total amount of token staked in the contract
-      totalStakedAmount: new TokenAmount(tmpToken3, '10'),
-      // the amount of token distributed per second to all LPs, constant
-      totalRewardRate: new TokenAmount(tmpToken3, '10'),
-      rewardRate: new TokenAmount(tmpToken3, '10'),
-      getHypotheticalRewardRate: (...a) => new TokenAmount(tmpToken2, '0'),
-      periodFinish: undefined,
-    },
-  ];
+  const widgetPairs = [['WONE', '1BUSD'], ['1LINK', '1ETH'], ['WBTC', '1ETH']]
+  const getTokenBySymbol = (symbol) => {
+    return Object.values(AllTokens).find(t => t.symbol === symbol)
+  }
+
+  const stakingInfos = widgetPairs.map(p =>
+    makeStakingInfo(
+      getTokenBySymbol(p[0]),
+      getTokenBySymbol(p[1])
+    )
+  )
 
 
   const DataRow = styled(RowBetween)`
@@ -201,7 +178,7 @@ export default function Earn() {
           ) : (
             stakingInfos?.map((stakingInfo, i) => {
               // need to sort by added liquidity here
-              return <PoolCard index={i} key={stakingInfo.stakingRewardAddress} stakingInfo={stakingInfo} />;
+              return <PoolCard index={i} key={i} stakingInfo={stakingInfo} />;
             })
           )}
         </PoolSection>

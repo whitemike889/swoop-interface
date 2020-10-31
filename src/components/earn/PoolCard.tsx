@@ -91,31 +91,35 @@ export default function PoolCard({ stakingInfo, index }: { stakingInfo: any, ind
   const token = currency0 === WONE[chainId] ? token1 : token0
   const WETH = currency0 === WONE[chainId] ? token0 : token1
 
+  const usedColor = useColor(token0)
   const palette = [ 'purple', 'lightgreen', 'cyan']
-  const backgroundColor = palette[index]//useColor(token0)
+  const backgroundColor = palette[index] || usedColor
 
   const totalSupplyOfStakingToken = useTotalSupply(stakingInfo.stakedAmount.token)
+
+  const totalSupplyOfStakingToken0 = useTotalSupply(token0)
+  const totalSupplyOfStakingToken1 = useTotalSupply(token1)
+
   const [, stakingTokenPair] = usePair(...stakingInfo.tokens)
 
   // let returnOverMonth: Percent = new Percent('0')
   let valueOfTotalStakedAmountInWETH: TokenAmount | undefined
-  if (totalSupplyOfStakingToken && stakingTokenPair) {
+ /* if (totalSupplyOfStakingToken && stakingTokenPair) {
     // take the total amount of LP tokens staked, multiply by ETH value of all LP tokens, divide by all LP tokens
     valueOfTotalStakedAmountInWETH = new TokenAmount(
-      WETH,
+      WONE[chainId],
       JSBI.divide(
         JSBI.multiply(
-          JSBI.multiply(stakingInfo.totalStakedAmount.raw, stakingTokenPair.reserveOf(WETH).raw),
+          JSBI.multiply(stakingInfo.totalStakedAmount.raw, stakingTokenPair.reserveOf(WONE[chainId]).raw),
           JSBI.BigInt(2) // this is b/c the value of LP shares are ~double the value of the WETH they entitle owner to
         ),
         totalSupplyOfStakingToken.raw
       )
     )
-  }
+  }*/
 
   // get the USD value of staked WETH
   const USDPrice = undefined //useUSDCPrice(WETH)
-
   const valueOfTotalStakedAmountInUSDC =
     valueOfTotalStakedAmountInWETH && USDPrice?.quote(valueOfTotalStakedAmountInWETH)
 
@@ -131,9 +135,10 @@ export default function PoolCard({ stakingInfo, index }: { stakingInfo: any, ind
         </TYPE.white>
 
       {  <StyledInternalLink to={`/swap/${currencyId(currency0)}/${currencyId(currency1)}`} style={{ width: '100%' }}>
-         {/* <ButtonPrimary padding="8px" borderRadius="8px">
-            {isStaking ? 'Manage' : 'Deposit'}
-          </ButtonPrimary>*/}
+         { <ButtonPrimary padding="8px" borderRadius="8px">
+            {/*{isStaking ? 'Manage' : 'Deposit'}*/}
+            Deposit
+          </ButtonPrimary> }
         </StyledInternalLink>}
       </TopSection>
 
