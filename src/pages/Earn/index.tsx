@@ -8,7 +8,7 @@ import {RowBetween} from '../../components/Row';
 import {CardSection, DataCard, CardNoise, CardBGImage} from '../../components/earn/styled';
 import {Countdown} from './Countdown';
 import Loader from '../../components/Loader';
-import {useActiveHmyReact, useActiveWeb3React} from '../../hooks';
+// import {useActiveHmyReact, useActiveWeb3React} from '../../hooks';
 import {Token, TokenAmount} from '@swoop-exchange/sdk';
 import {useAllTokens} from '../../hooks/Tokens';
 
@@ -105,7 +105,7 @@ const makeStakingInfo = (token0, token1) => {
 }
 
 export default function Earn() {
-  const {chainId} = useActiveHmyReact();
+  // const {chainId} = useActiveHmyReact();
 
   const AllTokens = useAllTokens()
 

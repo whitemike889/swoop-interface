@@ -5,17 +5,17 @@ import styled from 'styled-components'
 import { TYPE, StyledInternalLink } from '../../theme'
 import DoubleCurrencyLogo from '../DoubleLogo'
 //import { ETHER, JSBI, TokenAmount } from '@swoop-exchange/sdk'
-import {WONE, JSBI, TokenAmount, Token } from '@swoop-exchange/sdk'
+import { TokenAmount } from '@swoop-exchange/sdk'
 import { ButtonPrimary } from '../Button'
 // import { StakingInfo } from '../../state/stake/hooks'
 import { useColor } from '../../hooks/useColor'
 import { currencyId } from '../../utils/currencyId'
 import { Break, CardNoise, CardBGImage } from './styled'
 import { unwrappedToken } from '../../utils/wrappedCurrency'
-import { useTotalSupply } from '../../data/TotalSupply'
+// import { useTotalSupply } from '../../data/TotalSupply'
 import { usePair } from '../../data/Reserves'
-import useUSDCPrice from '../../utils/useUSDCPrice'
-import {useActiveHmyReact} from '../../hooks';
+// import useUSDCPrice from '../../utils/useUSDCPrice'
+// import {useActiveHmyReact} from '../../hooks';
 
 const StatContainer = styled.div`
   display: flex;
@@ -76,7 +76,7 @@ const BottomSection = styled.div<{ showBackground: boolean }>`
 
 // any StakingInfo
 export default function PoolCard({ stakingInfo, index }: { stakingInfo: any, index: number }) {
-  const { chainId } = useActiveHmyReact()
+  // const { chainId } = useActiveHmyReact()
 
   const token0 = stakingInfo.tokens[0]
   const token1 = stakingInfo.tokens[1]
@@ -88,17 +88,17 @@ export default function PoolCard({ stakingInfo, index }: { stakingInfo: any, ind
 
   // get the color of the token
   // todo chainId
-  const token = currency0 === WONE[chainId] ? token1 : token0
-  const WETH = currency0 === WONE[chainId] ? token0 : token1
+  //const token = currency0 === WONE[chainId] ? token1 : token0
+  //const WETH = currency0 === WONE[chainId] ? token0 : token1
 
   const usedColor = useColor(token0)
   const palette = [ 'purple', 'lightgreen', 'cyan']
   const backgroundColor = palette[index] || usedColor
 
-  const totalSupplyOfStakingToken = useTotalSupply(stakingInfo.stakedAmount.token)
+  //const totalSupplyOfStakingToken = useTotalSupply(stakingInfo.stakedAmount.token)
 
-  const totalSupplyOfStakingToken0 = useTotalSupply(token0)
-  const totalSupplyOfStakingToken1 = useTotalSupply(token1)
+  //const totalSupplyOfStakingToken0 = useTotalSupply(token0)
+  //const totalSupplyOfStakingToken1 = useTotalSupply(token1)
 
   const [, stakingTokenPair] = usePair(...stakingInfo.tokens)
 
@@ -123,6 +123,7 @@ export default function PoolCard({ stakingInfo, index }: { stakingInfo: any, ind
   const valueOfTotalStakedAmountInUSDC =
     valueOfTotalStakedAmountInWETH && USDPrice?.quote(valueOfTotalStakedAmountInWETH)
 
+  console.log({valueOfTotalStakedAmountInUSDC})
   return (
     <Wrapper showBackground={isStaking} bgColor={backgroundColor}>
       <CardBGImage desaturate />

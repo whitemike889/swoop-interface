@@ -1,7 +1,7 @@
 import { useState, useLayoutEffect } from 'react'
-import { shade } from 'polished'
-import Vibrant from 'node-vibrant'
-import { hex } from 'wcag-contrast'
+// import { shade } from 'polished'
+// import Vibrant from 'node-vibrant'
+// import { hex } from 'wcag-contrast'
 import { Token } from '@swoop-exchange/sdk'
 
 async function getColorFromToken(token: Token): Promise<string | null> {
@@ -11,8 +11,8 @@ async function getColorFromToken(token: Token): Promise<string | null> {
   }*/
 
   const path = `https://swoop-exchange.s3-us-west-1.amazonaws.com/tokens/${token.symbol}.png`
-
-  return Vibrant.from(path)
+  return null
+ /* return Vibrant.from(path)
     .getPalette()
     .then(palette => {
       console.log({palette})
@@ -27,7 +27,7 @@ async function getColorFromToken(token: Token): Promise<string | null> {
       }
       return null
     })
-    .catch(() => null)
+    .catch(() => null)*/
 }
 
 export function useColor(token?: Token) {
