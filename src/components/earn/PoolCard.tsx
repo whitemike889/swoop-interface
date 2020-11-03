@@ -75,8 +75,9 @@ const BottomSection = styled.div<{ showBackground: boolean }>`
 `
 
 // any StakingInfo
-export default function PoolCard({ stakingInfo, index }: { stakingInfo: any, index: number }) {
+export default function PoolCard({ stakingInfo, index, USDRates }: { stakingInfo: any, index: number, USDRates: any }) {
   // const { chainId } = useActiveHmyReact()
+
 
   const token0 = stakingInfo.tokens[0]
   const token1 = stakingInfo.tokens[1]
@@ -119,11 +120,16 @@ export default function PoolCard({ stakingInfo, index }: { stakingInfo: any, ind
   }*/
 
   // get the USD value of staked WETH
-  const USDPrice = undefined //useUSDCPrice(WETH)
-  const valueOfTotalStakedAmountInUSDC =
-    valueOfTotalStakedAmountInWETH && USDPrice?.quote(valueOfTotalStakedAmountInWETH)
 
-  console.log({valueOfTotalStakedAmountInUSDC})
+  const token0USD = stakingTokenPair ? +(stakingTokenPair.reserve0.toExact()) * USDRates[token0.symbol] : 0
+  const token1USD = stakingTokenPair ? +(stakingTokenPair.reserve1.toExact()) * USDRates[token1.symbol] : 0
+
+  const USDPrice = token0USD + token1USD
+
+  //undefined //useUSDCPrice(WETH)
+  const valueOfTotalStakedAmountInUSDC = USDPrice
+    //valueOfTotalStakedAmountInWETH && USDPrice?.quote(valueOfTotalStakedAmountInWETH)
+
   return (
     <Wrapper showBackground={isStaking} bgColor={backgroundColor}>
       <CardBGImage desaturate />
@@ -146,16 +152,17 @@ export default function PoolCard({ stakingInfo, index }: { stakingInfo: any, ind
       <StatContainer>
         {<RowBetween>
           <TYPE.white> Total deposited</TYPE.white>
-          <TYPE.white>
+         {/* <TYPE.white>
             {stakingTokenPair ? stakingTokenPair.reserve0.toSignificant(6) : '-'}&nbsp;{token0.symbol}<br/>
             {stakingTokenPair ? stakingTokenPair.reserve1.toSignificant(6) : '-'}&nbsp;{token1.symbol}
-          </TYPE.white>
-
-        {/*  <TYPE.white>
-            {valueOfTotalStakedAmountInUSDC
-              ? `$${valueOfTotalStakedAmountInUSDC.toFixed(0, { groupSeparator: ',' })}`
-              : `${valueOfTotalStakedAmountInWETH?.toSignificant(4, { groupSeparator: ',' }) ?? '-'} ETH`}
           </TYPE.white>*/}
+
+        { <TYPE.white>
+          ${valueOfTotalStakedAmountInUSDC ? valueOfTotalStakedAmountInUSDC.toFixed(0) : '-'}
+       {/*     {valueOfTotalStakedAmountInUSDC
+              ? `$${valueOfTotalStakedAmountInUSDC.toFixed(0, { groupSeparator: ',' })}`
+              : `${valueOfTotalStakedAmountInWETH?.toSignificant(4, { groupSeparator: ',' }) ?? '-'} ETH`}*/}
+          </TYPE.white>}
         </RowBetween>}
         <RowBetween>
           {/*<TYPE.white> Pool rate </TYPE.white>

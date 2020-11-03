@@ -83,13 +83,14 @@ export interface StakingInfo {
   ) => TokenAmount
 }
 
+
 const makeStakingInfo = (token0, token1) => {
-  const randomAmount = new TokenAmount(token0, '10')
-  return  {
+  const randomAmount = new TokenAmount(token0, '10');
+  return {
     stakingRewardAddress: '',
     tokens: [
       token0,
-      token1
+      token1,
     ],
     stakedAmount: randomAmount,
     // the amount of reward token earned by the active account, or undefined if no account
@@ -101,25 +102,69 @@ const makeStakingInfo = (token0, token1) => {
     rewardRate: randomAmount,
     getHypotheticalRewardRate: (...a) => randomAmount,
     periodFinish: undefined,
+  };
+};
+
+// todo hook
+
+const mapBinanceTokenSymbol = {
+  'WBTC': 'BTC',
+  '1BUSD': 'BUSD',
+  '1LINK': 'LINK',
+  '1ETH': 'ETH',
+  'WONE': 'ONE',
+};
+const getUSDRate = async (symbols, cb) => {
+  const rates = {};
+
+  try {
+    await Promise.all(symbols.map(async (s) => {
+      const symbol = mapBinanceTokenSymbol[s] || s;
+      const pairSymbol = symbol + 'USDT';
+      const res = await window.fetch(`https://api.binance.com/api/v3/avgPrice?symbol=${pairSymbol}`).then(r => r.json());
+
+      rates[s] = res.price;
+    }));
+  } catch (err) {
+    console.error(err.message);
+    return;
   }
-}
+
+  cb(rates);
+};
+
 
 export default function Earn() {
   // const {chainId} = useActiveHmyReact();
 
-  const AllTokens = useAllTokens()
+  const AllTokens = useAllTokens();
 
-  const widgetPairs = [['WONE', '1BUSD'], ['1LINK', '1ETH'], ['WBTC', '1ETH']]
+  const widgetPairs = [['WONE', '1BUSD'], ['1LINK', '1ETH'], ['WBTC', '1ETH']];
   const getTokenBySymbol = (symbol) => {
-    return Object.values(AllTokens).find(t => t.symbol === symbol)
-  }
+    return Object.values(AllTokens).find(t => t.symbol === symbol);
+  };
+
+  const [USDRates, setUSDRates] = React.useState({});
+
+  React.useEffect(() => {
+    const symbols = widgetPairs.flatMap(a => a);
+
+    getUSDRate(symbols, setUSDRates);
+    const interval = setInterval(() => {
+      getUSDRate(symbols, setUSDRates);
+    }, 30000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  console.log({USDRates});
 
   const stakingInfos = widgetPairs.map(p =>
     makeStakingInfo(
       getTokenBySymbol(p[0]),
-      getTokenBySymbol(p[1])
-    )
-  )
+      getTokenBySymbol(p[1]),
+    ),
+  );
 
 
   const DataRow = styled(RowBetween)`
@@ -149,7 +194,7 @@ export default function Earn() {
               </RowBetween>{' '}
               <ExternalLink
                 style={{color: 'white', textDecoration: 'underline'}}
-                href=""
+                href="https://medium.com/harmony-one/swoop-ethereum-harmony-cross-chain-dex-launch-f9d08f760e4c"
                 target="_blank"
               >
                 <TYPE.white fontSize={14}>Read more about SWOOP</TYPE.white>
@@ -178,7 +223,7 @@ export default function Earn() {
           ) : (
             stakingInfos?.map((stakingInfo, i) => {
               // need to sort by added liquidity here
-              return <PoolCard index={i} key={i} stakingInfo={stakingInfo} />;
+              return <PoolCard USDRates={USDRates} index={i} key={i} stakingInfo={stakingInfo} />;
             })
           )}
         </PoolSection>
