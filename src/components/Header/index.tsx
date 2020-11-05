@@ -37,6 +37,11 @@ const HeaderFrame = styled.div`
     width: calc(100%);
     position: relative;
   `};
+  
+  .pool-link {
+      color: white;
+      text-decoration: none;
+   }
 `
 
 const HeaderElement = styled.div`
@@ -167,6 +172,7 @@ export default function Header() {
               <img height="16" style={{ marginLeft: '4px', marginTop: '-4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" />
             </TitleText>
           </Title>
+          <a className="pool-link"  rel="noopener noreferrer" target="_blank" href="https://tvl.swoop.exchange">Pools</a>
         </HeaderElement>
         <HeaderControls>
           <HeaderElement>
