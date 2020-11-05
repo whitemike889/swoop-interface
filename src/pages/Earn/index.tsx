@@ -108,10 +108,15 @@ const makeStakingInfo = (token0, token1) => {
 // todo hook
 
 const mapBinanceTokenSymbol = {
+  '1WBTC': 'BTC',
   'WBTC': 'BTC',
+  'BUSD': 'BUSD',
   '1BUSD': 'BUSD',
+  'LINK': 'LINK',
   '1LINK': 'LINK',
+  '1WETH': 'ETH',
   '1ETH': 'ETH',
+  'WETH': 'ETH',
   'WONE': 'ONE',
 };
 const getUSDRate = async (symbols, cb) => {
@@ -133,37 +138,85 @@ const getUSDRate = async (symbols, cb) => {
   cb(rates);
 };
 
+const tokens = [
+  {
+    "chainId": 1,
+    "address": "0x3095c7557bCb296ccc6e363DE01b760bA031F2d9",
+    "symbol": "1WBTC",
+    "name": "Wrapped BTC",
+    "decimals": 8,
+    "logoURI": "https://assets.coingecko.com/coins/images/7598/small/wrapped_bitcoin_wbtc.png"
+  },
+  {
+    "chainId": 1,
+    "address": "0xF720b7910C6b2FF5bd167171aDa211E226740bfe",
+    "symbol": "1WETH",
+    "name": "Wrapped Ether",
+    "decimals": 18,
+    "logoURI": "https://swoop-exchange.s3-us-west-1.amazonaws.com/tokens/1WETH.png"
+  },
+  {
+    "chainId": 1,
+    "address": "0xE176EBE47d621b984a73036B9DA5d834411ef734",
+    "symbol": "BUSD",
+    "name": "Binance USD",
+    "decimals": 18,
+    "logoURI": "https://assets.coingecko.com/coins/images/9576/small/BUSD.png"
+  },
+  {
+    "chainId": 1,
+    "address": "0x218532a12a389a4a92fC0C5Fb22901D1c19198aA",
+    "symbol": "LINK",
+    "name": "ChainLink Token",
+    "decimals": 18,
+    "logoURI": "https://swoop-exchange.s3-us-west-1.amazonaws.com/tokens/1LINK.png"
+  },
+  {
+    "chainId": 1,
+    "address": "0xcF664087a5bB0237a0BAd6742852ec6c8d69A27a",
+    "symbol": "WONE",
+    "name": "Wrapped ONE",
+    "decimals": 18,
+    "logoURI": "https://swoop-exchange.s3-us-west-1.amazonaws.com/tokens/WONE.png"
+  }]
+
 
 export default function Earn() {
-  // const {chainId} = useActiveHmyReact();
+  //const {chainId} = useActiveHmyReact();
 
-  const AllTokens = useAllTokens();
+  const AllTokens = tokens.map(t => new Token(1, t.address, t.decimals, t.symbol, t.name))//useAllTokens();
 
-  const widgetPairs = [['WONE', '1BUSD'], ['1LINK', '1ETH'], ['WBTC', '1ETH']];
+  const widgetPairs = [['WONE', 'BUSD'], ['LINK', '1WETH'], ['1WBTC', '1WETH']];
+  // const widgetPairs = [['WONE', '1BUSD'], ['1LINK', '1ETH'], ['WBTC', '1ETH']];
+
   const getTokenBySymbol = (symbol) => {
     return Object.values(AllTokens).find(t => t.symbol === symbol);
   };
 
   const [USDRates, setUSDRates] = React.useState({});
 
-  React.useEffect(() => {
-    const symbols = widgetPairs.flatMap(a => a);
+  const symbols = widgetPairs.flatMap(a => a);
 
+  React.useEffect(() => {
     getUSDRate(symbols, setUSDRates);
-    const interval = setInterval(() => {
+    /*const interval = setInterval(() => {
       getUSDRate(symbols, setUSDRates);
     }, 30000);
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearInterval(interval);*/
+  }, [symbols]);
 
-  console.log({USDRates});
+  const stakingInfos = widgetPairs.map((p) => {
 
-  const stakingInfos = widgetPairs.map(p =>
-    makeStakingInfo(
-      getTokenBySymbol(p[0]),
-      getTokenBySymbol(p[1]),
-    ),
+      try {
+        return makeStakingInfo(
+          getTokenBySymbol(p[0]),
+          getTokenBySymbol(p[1]),
+        );
+      } catch (e) {
+        return null;
+      }
+    },
   );
 
 

@@ -168,25 +168,25 @@ export default function Header() {
               <img height="16" style={{ marginLeft: '4px', marginTop: '-4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" />
             </TitleText>
           </Title>
-          <NavLink style={{color: 'white', textDecoration: 'none'}} to={'/poollist'}>Pools</NavLink>
+          {/*<NavLink style={{color: 'white', textDecoration: 'none'}} to={'/poollist'}>Pools</NavLink>*/}
         </HeaderElement>
         <HeaderControls>
           <HeaderElement>
             <TestnetWrapper>
               {!isMobile && chainId && NETWORK_LABELS[chainId] && <NetworkCard>{NETWORK_LABELS[chainId]}</NetworkCard>}
             </TestnetWrapper>
-            <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
+            {/*<AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
               {account && userEthBalance ? (
                 <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
                   {userEthBalance?.toSignificant(6)} ONE
                 </BalanceText>
               ) : null}
               <Web3Status />
-            </AccountElement>
+            </AccountElement>*/}
           </HeaderElement>
           <HeaderElementWrap>
             {/* <VersionSwitch /> */}
-            <Settings />
+            {/*<Settings />*/}
             {/* <Menu /> */}
           </HeaderElementWrap>
         </HeaderControls>

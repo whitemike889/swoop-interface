@@ -62,7 +62,7 @@ ReactDOM.render(
           <Updaters />
           <ThemeProvider>
             <ThemedGlobalStyle />
-            <Disclaimer/>
+            {/*<Disclaimer/>*/}
             <App />
           </ThemeProvider>
         </Provider>

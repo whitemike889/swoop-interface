@@ -104,7 +104,7 @@ export default function PoolCard({ stakingInfo, index, USDRates }: { stakingInfo
   const [, stakingTokenPair] = usePair(...stakingInfo.tokens)
 
   // let returnOverMonth: Percent = new Percent('0')
-  let valueOfTotalStakedAmountInWETH: TokenAmount | undefined
+  // let valueOfTotalStakedAmountInWETH: TokenAmount | undefined
  /* if (totalSupplyOfStakingToken && stakingTokenPair) {
     // take the total amount of LP tokens staked, multiply by ETH value of all LP tokens, divide by all LP tokens
     valueOfTotalStakedAmountInWETH = new TokenAmount(
@@ -141,24 +141,28 @@ export default function PoolCard({ stakingInfo, index, USDRates }: { stakingInfo
           {currency0.symbol}-{currency1.symbol}
         </TYPE.white>
 
-      {  <StyledInternalLink to={`/swap/${currencyId(currency0)}/${currencyId(currency1)}`} style={{ width: '100%' }}>
-         { <ButtonPrimary padding="8px" borderRadius="8px">
+     {/* {  <StyledInternalLink to={`/swap/${currencyId(currency0)}/${currencyId(currency1)}`} style={{ width: '100%' }}>*/}
+        <a href="https://swoop.exchange" target="_blank" style={{textDecoration: 'none'}}>
+     { <ButtonPrimary padding="8px" borderRadius="8px">
             {/*{isStaking ? 'Manage' : 'Deposit'}*/}
             Deposit
           </ButtonPrimary> }
-        </StyledInternalLink>}
+           </a>
+       {/* </StyledInternalLink>}*/}
       </TopSection>
 
       <StatContainer>
         {<RowBetween>
           <TYPE.white> Total deposited</TYPE.white>
-         {/* <TYPE.white>
+         {<TYPE.white>
             {stakingTokenPair ? stakingTokenPair.reserve0.toSignificant(6) : '-'}&nbsp;{token0.symbol}<br/>
             {stakingTokenPair ? stakingTokenPair.reserve1.toSignificant(6) : '-'}&nbsp;{token1.symbol}
-          </TYPE.white>*/}
+          </TYPE.white>}
 
         { <TYPE.white>
-          ${valueOfTotalStakedAmountInUSDC ? valueOfTotalStakedAmountInUSDC.toFixed(0) : '-'}
+          {valueOfTotalStakedAmountInUSDC ? valueOfTotalStakedAmountInUSDC.toLocaleString('en-US', {
+          maximumFractionDigits: 0,
+          minimumFractionDigits: 0, style:'currency', currency:'USD'}) : '-'}
        {/*     {valueOfTotalStakedAmountInUSDC
               ? `$${valueOfTotalStakedAmountInUSDC.toFixed(0, { groupSeparator: ',' })}`
               : `${valueOfTotalStakedAmountInWETH?.toSignificant(4, { groupSeparator: ',' }) ?? '-'} ETH`}*/}

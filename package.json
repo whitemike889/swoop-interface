@@ -13,7 +13,7 @@
     "@swoop-exchange/core": "=1.0.3",
     "@swoop-exchange/default-token-list": "=1.3.4",
     "@swoop-exchange/periphery": "=1.0.1",
-    "@swoop-exchange/sdk": "=1.2.4",
+    "@swoop-exchange/sdk": "=1.4.2",
     "@swoop-exchange/utils": "=1.0.1",
     "@types/jest": "^25.2.1",
     "@types/lodash.flatmap": "^4.5.6",

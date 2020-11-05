@@ -70,6 +70,7 @@ export default function App() {
             <Web3ReactManager>
               <Switch>
                 <Route exact strict path="/poollist" component={Earn} />
+                {/*
                 <Route exact strict path="/swap" component={Swap} />
                 <Route exact strict path="/swap/:outputCurrency" component={RedirectToSwap} />
                 <Route exact strict path="/send" component={RedirectPathToSwapOnly} />
@@ -80,7 +81,7 @@ export default function App() {
                 <Route exact path="/add/:currencyIdA" component={RedirectOldAddLiquidityPathStructure} />
                 <Route exact path="/add/:currencyIdA/:currencyIdB" component={RedirectDuplicateTokenIds} />
                 <Route exact strict path="/remove/:tokens" component={RedirectOldRemoveLiquidityPathStructure} />
-                <Route exact strict path="/remove/:currencyIdA/:currencyIdB" component={RemoveLiquidity} />
+                <Route exact strict path="/remove/:currencyIdA/:currencyIdB" component={RemoveLiquidity} />*/}
                 <Route component={RedirectPathToSwapOnly} />
               </Switch>
             </Web3ReactManager>
