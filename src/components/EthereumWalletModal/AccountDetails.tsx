@@ -1,16 +1,16 @@
-import React, { useCallback, useContext } from 'react'
-import ReactGA from 'react-ga'
-import { useDispatch } from 'react-redux'
-import styled, { ThemeContext } from 'styled-components'
-import { AppDispatch } from '../../state'
-import { clearAllTransactions } from '../../state/transactions/actions'
-import { shortenHarmonyAddress } from '../../utils'
-import { AutoRow } from '../Row'
+import React, {  } from 'react'
+//import ReactGA from 'react-ga'
+//import { useDispatch } from 'react-redux'
+import styled  from 'styled-components'
+//import { AppDispatch } from '../../state'
+// import { clearAllTransactions } from '../../state/transactions/actions'
+//import { shortenHarmonyAddress } from '../../utils'
+//import { AutoRow } from '../Row'
 import Copy from '../AccountDetails/Copy'
 // import Transaction from './Transaction'
-import { SUPPORTED_WALLETS, UserWallet } from '../../constants'
+//import { SUPPORTED_WALLETS, UserWallet } from '../../constants'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
-import { getHarmonyExplorerLink } from '../../utils'
+//import { getHarmonyExplorerLink } from '../../utils'
 import { injected, walletconnect, walletlink, fortmatic, portis } from '../../connectors'
 import CoinbaseWalletIcon from '../../assets/images/coinbaseWalletIcon.svg'
 import WalletConnectIcon from '../../assets/images/walletConnectIcon.svg'
@@ -18,11 +18,11 @@ import FortmaticIcon from '../../assets/images/fortmaticIcon.png'
 import PortisIcon from '../../assets/images/portisIcon.png'
 import Identicon from '../Identicon'
 import { ButtonSecondary } from '../Button'
-import { ExternalLink as LinkIcon } from 'react-feather'
-import { ExternalLink, LinkStyledButton, TYPE } from '../../theme'
+//import { ExternalLink as LinkIcon } from 'react-feather'
+//import { ExternalLink, LinkStyledButton, TYPE } from '../../theme'
 
-import { useUserWallet, useUserActiveWallet } from '../../state/user/hooks'
-import { AbstractWallet } from '@swoop-exchange/utils'
+import {  useUserActiveWallet } from '../../state/user/hooks'
+//import { AbstractWallet } from '@swoop-exchange/utils'
 import { shortenAddress } from '../../utils'
 
 import { useActiveHmyReact } from '../../hooks'
@@ -99,21 +99,6 @@ const YourAccount = styled.div`
   }
 `
 
-const LowerSection = styled.div`
-  ${({ theme }) => theme.flexColumnNoWrap}
-  padding: 1.5rem;
-  flex-grow: 1;
-  overflow: auto;
-  background-color: ${({ theme }) => theme.bg2};
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 20px;
-
-  h5 {
-    margin: 0;
-    font-weight: 400;
-    color: ${({ theme }) => theme.text3};
-  }
-`
 
 const AccountControl = styled.div`
   display: flex;
@@ -137,16 +122,6 @@ const AccountControl = styled.div`
   }
 `
 
-const AddressLink = styled(ExternalLink)<{ hasENS: boolean; isENS: boolean }>`
-  font-size: 0.825rem;
-  color: ${({ theme }) => theme.text3};
-  margin-left: 1rem;
-  font-size: 0.825rem;
-  display: flex;
-  :hover {
-    color: ${({ theme }) => theme.text2};
-  }
-`
 
 const CloseIcon = styled.div`
   position: absolute;
@@ -186,9 +161,6 @@ const IconWrapper = styled.div<{ size?: number }>`
   `};
 `
 
-const TransactionListWrapper = styled.div`
-  ${({ theme }) => theme.flexColumnNoWrap};
-`
 
 const WalletAction = styled(ButtonSecondary)`
   width: fit-content;
@@ -206,15 +178,6 @@ const MainWalletAction = styled(WalletAction)`
   color: ${({ theme }) => theme.primary1};
 `
 
-/*function renderTransactions(transactions: string[]) {
-  return (
-    <TransactionListWrapper>
-      {transactions.map((hash, i) => {
-        return <Transaction key={i} hash={hash} />
-      })}
-    </TransactionListWrapper>
-  )
-}*/
 
 interface AccountDetailsProps {
   toggleWalletModal: () => void
@@ -226,84 +189,26 @@ interface AccountDetailsProps {
 
 export default function AccountDetails({
                                          toggleWalletModal,
-                                         pendingTransactions,
-                                         confirmedTransactions,
-                                         ENSName,
-                                         openOptions
-                                       }: AccountDetailsProps) {
-  const { userWallet, account, chainId, wrapper, bech32Address } = useActiveHmyReact();
-  const theme = useContext(ThemeContext)
-  const dispatch = useDispatch<AppDispatch>()
 
-  const [, setUserWallet] = useUserWallet()
+                                         ENSName,
+
+                                       }: AccountDetailsProps) {
+  const {  account, bech32Address } = useActiveHmyReact();
+  //const theme = useContext(ThemeContext)
+  //const dispatch = useDispatch<AppDispatch>()
+
+  //const [, setUserWallet] = useUserWallet()
 
   const connector = useUserActiveWallet()
 
   function formatConnectorName() {
 
-    let name = '';
-
-    if (userWallet && userWallet.type != null && userWallet.type !== '') {
-      switch (userWallet.type.toLowerCase()) {
-        case 'onewallet':
-          name = 'OneWallet';
-          break;
-        case 'mathwallet':
-          name = 'MathWallet';
-          break;
-        default:
-          name = '';
-      }
-    } else {
-      const { ethereum } = window
-      const isMetaMask = !!(ethereum && ethereum.isMetaMask)
-
-      name = Object.keys(SUPPORTED_WALLETS)
-        .filter(
-          k =>
-            SUPPORTED_WALLETS[k].connector === connector && (connector !== injected || isMetaMask === (k === 'METAMASK'))
-        )
-        .map(k => SUPPORTED_WALLETS[k].name)[0]
-    }
-
     return <WalletName>Connected with MetaMask</WalletName>
   }
 
-  const tryDeactivation = async (connector: AbstractWallet | undefined) => {
+  /*const tryDeactivation = async (connector: AbstractWallet | undefined) => {
     console.log('tryDeactivation')
-    // @ts-ignore
-
-   /* let name = ''
-    Object.keys(SUPPORTED_WALLETS).map(key => {
-      if (connector === SUPPORTED_WALLETS[key].connector) {
-        return (name = SUPPORTED_WALLETS[key].name)
-      }
-      return true
-    })
-
-    // log selected wallet
-    ReactGA.event({
-      category: 'Wallet',
-      action: 'Signout Wallet',
-      label: name
-    })
-
-    const maybePromise = connector && connector.signOut()
-
-    if (maybePromise) {
-      maybePromise.then(() => {
-        setUserWallet({} as UserWallet);
-        toggleWalletModal();
-      })
-        .catch(error => {
-          toggleWalletModal();
-        });
-
-    } else {
-      setUserWallet({} as UserWallet);
-      toggleWalletModal();
-    }*/
-  }
+  }*/
 
   function getStatusIcon() {
     if (connector === injected) {
@@ -349,9 +254,6 @@ export default function AccountDetails({
     return null
   }
 
-  const clearAllTransactionsCallback = useCallback(() => {
-    if (chainId) dispatch(clearAllTransactions({ chainId }))
-  }, [dispatch, chainId])
 
   const accountMetaMask = useMetaMaskAccount()
 

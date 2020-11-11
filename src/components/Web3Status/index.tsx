@@ -23,7 +23,7 @@ import {useActiveHmyReact} from '../../hooks';
 import {isMetaMaskConnected} from '../../bridge/ETHWallet/web3';
 import Identicon from '../Identicon';
 import Loader from '../Loader';
-import {useAllEthereumBalances, useMetaMaskAccount} from '../../bridge/ETHWallet/hooks';
+import { useMetaMaskAccount} from '../../bridge/ETHWallet/hooks';
 import {RowBetween} from '../Row';
 import WalletModal from '../WalletModal';
 import WalletEthereumModal from '../EthereumWalletModal';
@@ -222,7 +222,7 @@ function Web3StatusInnerMetaMask() {
   const [connectMetaMask, setConnectMetaMask] = useState(false)
 
   const account = useMetaMaskAccount(connectMetaMask)
-  const balance = useAllEthereumBalances(account);
+  // const balance = useAllEthereumBalances(account);
   const isConnected = isMetaMaskConnected();
   const toggleWalletModal = useEthereumWalletModalToggle()
 

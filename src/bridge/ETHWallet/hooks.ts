@@ -23,11 +23,12 @@ const formatTokens = (swoopTokens, etherTokens) => {
 };
 
 export const useAllEthereumBalances = (address) => {
-  let id;
   const [balances, setBalances] = useState<TBalances>({});
   const swoopTokens = useAllTokens();
 
   useEffect(() => {
+    let id;
+
     const run = () => {
       getAllEthereumBalances(address)
         .then(balances => formatTokens(swoopTokens, balances))
@@ -42,11 +43,12 @@ export const useAllEthereumBalances = (address) => {
     }
 
     return () => clearTimeout(id);
-  }, [address]);
+  }, [address, swoopTokens]);
 
   return balances;
 };
 
+// todo disconnect? change state
 export const useMetaMaskAccount = (connectMetaMask: boolean = false) => {
   const [account, setAccount] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -57,10 +59,21 @@ export const useMetaMaskAccount = (connectMetaMask: boolean = false) => {
         return
       }
 
+      const provider = window.ethereum
+
       setIsLoading(true);
       try {
         //@ts-ignore
-        const accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
+        const accounts = await provider.request({method: 'eth_requestAccounts'});
+
+        provider.on('accountsChanged', (accounts) =>
+          setAccount(accounts[0])
+        )
+
+        provider.on('disconnect', () => {
+          setAccount(null)
+        })
+
         setAccount(accounts[0]);
       } catch (e) {
       }

@@ -63,9 +63,6 @@ export function SwapPoolTabs({ active }: { active: 'swap' | 'pool' | 'bridge'}) 
       <StyledNavLink id={`pool-nav-link`} to={'/pool'} isActive={() => active === 'pool'}>
         {t('pool')}
       </StyledNavLink>
-      <StyledNavLink id={`pool-nav-link`} to={'/bridge'} isActive={() => active === 'bridge'}>
-        {t('Bridge')}
-      </StyledNavLink>
     </Tabs>
   )
 }

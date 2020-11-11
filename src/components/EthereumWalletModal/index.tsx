@@ -1,27 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import ReactGA from 'react-ga'
+
 import styled from 'styled-components'
-import { isMobile } from 'react-device-detect'
+
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
 import usePrevious from '../../hooks/usePrevious'
 import { useEthereumWalletModalOpen, useEthereumWalletModalToggle } from '../../state/application/hooks'
-import { UserWallet } from '../../constants'
-
-//import { JSBI, CurrencyAmount } from '@swoop-exchange/sdk'
 
 import Modal from '../Modal'
 import AccountDetails from './AccountDetails'
-import PendingView from './PendingView'
-import Option from './Option'
-import { SUPPORTED_WALLETS } from '../../constants'
-import { ExternalLink } from '../../theme'
-import MetamaskIcon from '../../assets/images/metamask.png'
+/*import PendingView from './PendingView'
+//import Option from './Option'
+//import { SUPPORTED_WALLETS } from '../../constants'
+//import { ExternalLink } from '../../theme'
+//import MetamaskIcon from '../../assets/images/metamask.png'*/
 import { ReactComponent as Close } from '../../assets/images/x.svg'
-import { injected, fortmatic, portis } from '../../connectors'
+//import { injected, fortmatic, portis } from '../../connectors'
+import {  fortmatic } from '../../connectors'
 import { OVERLAY_READY } from '../../connectors/Fortmatic'
-import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+// import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 //import { AbstractConnector } from '@web3-react/abstract-connector'
-import { AbstractWallet } from '@swoop-exchange/utils'
+//import { AbstractWallet } from '@swoop-exchange/utils'
 
 import { useUserWallet } from '../../state/user/hooks'
 
@@ -87,33 +85,6 @@ const UpperSection = styled.div`
   }
 `
 
-const Blurb = styled.div`
-  ${({ theme }) => theme.flexRowNoWrap}
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 2rem;
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    margin: 1rem;
-    font-size: 12px;
-  `};
-`
-
-const OptionGrid = styled.div`
-  display: grid;
-  grid-gap: 10px;
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    grid-template-columns: 1fr;
-    grid-gap: 10px;
-  `};
-`
-
-const HoverText = styled.div`
-  :hover {
-    cursor: pointer;
-  }
-`
-
 const WALLET_VIEWS = {
   OPTIONS: 'options',
   OPTIONS_SECONDARY: 'options_secondary',
@@ -135,15 +106,15 @@ export default function WalletModal({
 
   const [walletView, setWalletView] = useState(WALLET_VIEWS.ACCOUNT)
 
-  const [pendingWallet, setPendingWallet] = useState<AbstractWallet | undefined>()
+  // const [pendingWallet, setPendingWallet] = useState<AbstractWallet | undefined>()
 
-  const [pendingError, setPendingError] = useState<boolean>()
+  const [, setPendingError] = useState<boolean>()
 
-  const [account, setAccount] = useState<string | null>()
+  const [account] = useState<string | null>()
 
-  const [active, setActive] = useState<boolean>()
+  const [active] = useState<boolean>()
 
-  const [userWallet, setUserWallet] = useUserWallet()
+  const [userWallet] = useUserWallet()
 
   const walletModalOpen = useEthereumWalletModalOpen()
   const toggleWalletModal = useEthereumWalletModalToggle()

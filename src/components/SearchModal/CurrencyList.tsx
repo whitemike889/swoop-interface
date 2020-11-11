@@ -16,7 +16,6 @@ import Loader from '../Loader';
 import {isTokenOnList} from '../../utils';
 
 import {useActiveHmyReact} from '../../hooks';
-import {useAllEthereumBalances, useMetaMaskAccount} from '../../bridge/ETHWallet/hooks';
 
 function currencyKey(currency: Currency): string {
   return currency instanceof Token ? currency.address : currency === HARMONY ? 'ONE' : '';
@@ -178,14 +177,7 @@ export default function CurrencyList({
   fixedListRef?: MutableRefObject<FixedSizeList | undefined>
   showETH: boolean
 }) {
-
-  const ETHAccount = useMetaMaskAccount();
-  const ETHBalances = useAllEthereumBalances(ETHAccount);
-
   const itemData = useMemo(() => (showETH ? [Currency.HARMONY, ...currencies] : currencies), [currencies, showETH]);
-
-  console.log({itemData})
-
 
   const Row = useCallback(
     ({data, index, style}) => {

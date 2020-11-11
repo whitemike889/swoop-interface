@@ -45,6 +45,11 @@ import {ClickableText} from '../Pool/styleds';
 import {useActiveHmyReact} from '../../hooks';
 import {useAllEthereumBalances, useMetaMaskAccount} from '../../bridge/ETHWallet/hooks';
 
+import { ExchangeBlock } from 'bridge-ui-sdk'
+
+import Modal from '../../components/Modal';
+
+
 export default function Bridge() {
   const loadedUrlParams = useDefaultsFromURLSearch();
 
@@ -53,8 +58,6 @@ export default function Bridge() {
 
   const currencyA = ETHBalances['LINK'] ? ETHBalances['LINK'].token : null
   const currencyB = ETHBalances['BUSD'] ? ETHBalances['BUSD'].token : null
-
-  console.log({currencyA, currencyB})
 
   const currencies = {
     [Field.INPUT]: currencyA,
@@ -82,7 +85,11 @@ export default function Bridge() {
 
   const {account} = useActiveHmyReact();
 
-  const theme = useContext(ThemeContext);
+  // const theme = useContext(ThemeContext);
+
+  const theme = {
+    inputBg: 'red !important'
+  }
 
   // toggle wallet when disconnected
   const toggleWalletModal = useWalletModalToggle();
@@ -285,136 +292,12 @@ export default function Bridge() {
       />
       <AppBody>
         <SwapPoolTabs active={'bridge'} />
-        <Wrapper id="swap-page">
-         {/* <ConfirmSwapModal
-            isOpen={showConfirm}
-            trade={trade}
-            originalTrade={tradeToConfirm}
-            onAcceptChanges={handleAcceptChanges}
-            attemptingTxn={attemptingTxn}
-            txHash={txHash}
-            recipient={recipient}
-            allowedSlippage={allowedSlippage}
-            onConfirm={handleSwap}
-            swapErrorMessage={swapErrorMessage}
-            onDismiss={handleConfirmDismiss}
-          />*/}
-
-          <AutoColumn gap={'md'}>
-            <CurrencyInputPanel
-              label={'From'}
-              value={formattedAmounts[Field.INPUT]}
-              showMaxButton={true}
-              currency={currencies[Field.INPUT]}
-              onUserInput={handleTypeInput}
-              onMax={handleMaxInput}
-              onCurrencySelect={handleInputSelect}
-              otherCurrency={currencies[Field.OUTPUT]}
-              id="swap-currency-input"
-            />
-
-            <AutoColumn justify="space-between">
-              <AutoRow justify="space-between" style={{padding: '0 1rem'}}>
-                <ArrowWrapper clickable>
-                  <ArrowDown
-                    size="16"
-                    onClick={() => {
-                      setApprovalSubmitted(false); // reset 2 step UI for approvals
-                      onSwitchTokens();
-                    }}
-                    color={currencies[Field.INPUT] && currencies[Field.OUTPUT] ? theme.primary1 : theme.text2}
-                  />
-                </ArrowWrapper>
-              {/*  {recipient === null && !showWrap && isExpertMode ? (
-                  <LinkStyledButton id="add-recipient-button" onClick={() => onChangeRecipient('')}>
-                    + Add a send (optional)
-                  </LinkStyledButton>
-                ) : null}*/}
-              </AutoRow>
-            </AutoColumn>
-            <CurrencyInputPanel
-              value={formattedAmounts[Field.OUTPUT]}
-              onUserInput={handleTypeOutput}
-              label={'To'}
-              showMaxButton={false}
-              currency={currencies[Field.OUTPUT]}
-              onCurrencySelect={handleOutputSelect}
-              otherCurrency={currencies[Field.INPUT]}
-              id="swap-currency-output"
-            />
-
-           {/* {recipient !== null && !showWrap ? (
-              <>
-                <AutoRow justify="space-between" style={{padding: '0 1rem'}}>
-                  <ArrowWrapper clickable={false}>
-                    <ArrowDown size="16" color={theme.text2} />
-                  </ArrowWrapper>
-                  <LinkStyledButton id="remove-recipient-button" onClick={() => onChangeRecipient(null)}>
-                    - Remove send
-                  </LinkStyledButton>
-                </AutoRow>
-                <AddressInputPanel id="recipient" value={recipient} onChange={onChangeRecipient} />
-              </>
-            ) : null}*/}
-
-           {/* {showWrap ? null : (
-              <Card padding={'.25rem .75rem 0 .75rem'} borderRadius={'20px'}>
-                <AutoColumn gap="4px">
-                  <RowBetween align="center">
-                    <Text fontWeight={500} fontSize={14} color={theme.text2}>
-                      Price
-                    </Text>
-                    <TradePrice
-                      inputCurrency={currencies[Field.INPUT]}
-                      outputCurrency={currencies[Field.OUTPUT]}
-                      price={trade?.executionPrice}
-                      showInverted={showInverted}
-                      setShowInverted={setShowInverted}
-                    />
-                  </RowBetween>
-
-                </AutoColumn>
-              </Card>
-            )}*/}
-          </AutoColumn>
-          <BottomGrouping>
-            {!account ?  (
-              <GreyCard style={{textAlign: 'center'}}>
-                <TYPE.main mb="4px">Insufficient liquidity for this trade.</TYPE.main>
-              </GreyCard>
-            ) : (
-              <ButtonError
-                onClick={() => {
-                  if (isExpertMode) {
-                    handleSwap();
-                  } else {
-                   /* setSwapState({
-                      tradeToConfirm: trade,
-                      attemptingTxn: false,
-                      swapErrorMessage: undefined,
-                      showConfirm: true,
-                      txHash: undefined,
-                    });*/
-                  }
-                }}
-                id="swap-button"
-                disabled={!isValid && false}
-                error={isValid && true}
-              >
-                <Text fontSize={20} fontWeight={500}>
-                {/*  {
-                    attemptingTxn && isExpertMode
-                      ? <Dots>Swapping</Dots>
-                      : swapInputError
-                      ? swapInputError
-                      : 'Swap on Bridge'}*/}
-                </Text>
-              </ButtonError>
-            )}
-            {/*{betterTradeLinkVersion && <BetterTradeLink version={betterTradeLinkVersion} />}*/}
-          </BottomGrouping>
-        </Wrapper>
+        <ExchangeBlock network='testnet' addressMetamask={ETHAccount} theme={theme}/>
       </AppBody>
+
+      <Modal isOpen={false} onDismiss={()=>{console.log('dismiss')}} maxHeight={90} width={2000} >
+
+      </Modal>
       {/*<AdvancedSwapDetailsDropdown trade={trade} />*/}
     </>
   );
