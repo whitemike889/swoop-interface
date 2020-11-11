@@ -41,15 +41,16 @@ const HeaderFrame = styled.div`
     width: calc(100%);
     position: relative;
   `};
-  
-  .a-link {
-      color: white;
-      text-decoration: none;
-      margin-left: 10px;
-      cursor: pointer;
-   }
-
 `;
+
+const Link = styled.span`
+  span, a, a:visited {
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  ${({theme}) => `color: ${theme.primaryText1}`};
+  }
+`
 
 const HeaderElement = styled.div`
   display: flex;
@@ -188,11 +189,16 @@ export default function Header() {
               </TitleText>
             </Title>
             <HeaderElement>
-              <span className="a-link" onClick={()=>setShowBridge(!showBridge)}>Bridge</span>
+            <Link>
+              <span onClick={()=>setShowBridge(!showBridge)}>Bridge</span>
+            </Link>
             </HeaderElement>
             <HeaderElement>
-              <a className="a-link" rel="noopener noreferrer" target="_blank"
+              <Link>
+              <a style={{marginLeft: '10px'}}
+                rel="noopener noreferrer" target="_blank"
                  href="https://tvl.swoop.exchange">Pools</a>
+              </Link>
             </HeaderElement>
           </HeaderElement>
           <HeaderControls>
@@ -222,7 +228,9 @@ export default function Header() {
       <Modal isOpen={showBridge} onDismiss={()=>setShowBridge(false)} width={560}>
         <div style={{width: '100%', padding: '15px'}}>
          Harmony Bridge. The stand-alone version is available&nbsp;
-          <a style={{outline: 'none', cursor: 'pointer', textDecoration: 'none', color: 'cyan'}} rel="noopener noreferrer" target="_blank" href="https://bridge.harmony.one/">here</a>
+          <Link>
+            <a rel="noopener noreferrer" target="_blank" href="https://bridge.harmony.one/">here</a>
+          </Link>
         </div>
         <ExchangeBlock addressOneWallet={account} network={bridgeChain} addressMetamask={ETHAccount}/>
       </Modal>
