@@ -187,7 +187,7 @@ export default function Header() {
               </TitleText>
             </Title>
             <HeaderElement>
-              <a className="a-link" href="false" onClick={()=>setShowBridge(!showBridge)}>Bridge</a>
+              <span className="a-link" onClick={()=>setShowBridge(!showBridge)}>Bridge</span>
             </HeaderElement>
             <HeaderElement>
               <a className="a-link" rel="noopener noreferrer" target="_blank"
@@ -221,7 +221,7 @@ export default function Header() {
       <Modal isOpen={showBridge} onDismiss={()=>setShowBridge(false)} width={564}>
         <div style={{width: '100%', padding: '15px'}}>
          Harmony Bridge. The stand-alone version is available&nbsp;
-          <a style={{cursor: 'pointer', textDecoration: 'none', color: 'cyan'}} rel="noopener noreferrer" target="_blank" href="https://bridge.harmony.one/">here</a>
+          <a style={{outline: 'none', cursor: 'pointer', textDecoration: 'none', color: 'cyan'}} rel="noopener noreferrer" target="_blank" href="https://bridge.harmony.one/">here</a>
         </div>
         <ExchangeBlock network={bridgeChain} addressMetamask={ETHAccount}/>
       </Modal>
