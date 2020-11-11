@@ -1,10 +1,12 @@
 import Web3 from 'web3';
 import {ethereumTokens, ERC20ABI} from '../constants';
+import {hmy} from '../../connectors';
 
-const url = 'https://kovan.infura.io/v3/b354225f2d364c80932a2d80320db450';
+
+const url = process.env.REACT_APP_NETWORK_URL // 'https://kovan.infura.io/v3/b354225f2d364c80932a2d80320db450';
 const web3 = new Web3(new Web3.providers.HttpProvider(url));
 
-const tokens = ethereumTokens.kovan;
+const tokens = hmy.chainId === 1 ? ethereumTokens.mainnet : ethereumTokens.kovan;
 
 export const isMetaMaskConnected = () => {
   if (!window.ethereum || !window.ethereum.isMetaMask) {
@@ -13,7 +15,7 @@ export const isMetaMaskConnected = () => {
 
   //@ts-ignore
   return window.ethereum.isConnected();
-}
+};
 
 export const getERC20Balance = async (address, token) => {
   const contract = new web3.eth.Contract(ERC20ABI as any, tokens[token].ethereumAddress);
