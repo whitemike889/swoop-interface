@@ -22,7 +22,7 @@ import Web3Status from '../Web3Status';
 import {useActiveHmyReact} from '../../hooks';
 import Modal from '../ModalBridge';
 import {ExchangeBlock} from 'bridge-ui-sdk';
-import {useAllEthereumBalances, useMetaMaskAccount} from '../../bridge/ETHWallet/hooks';
+import { useMetaMaskAccount} from '../../bridge/ETHWallet/hooks';
 import 'bridge-ui-sdk/dist/index.css'
 
 const {ChainID} = require('@harmony-js/utils');
@@ -164,9 +164,10 @@ export default function Header() {
   const {account, chainId} = useActiveHmyReact();
   const [showBridge, setShowBridge] = useState(false);
   const ETHAccount = useMetaMaskAccount();
-  const ETHBalances = useAllEthereumBalances(ETHAccount);
+  //const ETHBalances = useAllEthereumBalances(ETHAccount);
+  // console.log({account})
+
   const bridgeChain = chainId === 1 ? 'mainnet' : 'testnet'
-  console.log({ETHBalances})
 
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? ''];
 
@@ -223,7 +224,7 @@ export default function Header() {
          Harmony Bridge. The stand-alone version is available&nbsp;
           <a style={{outline: 'none', cursor: 'pointer', textDecoration: 'none', color: 'cyan'}} rel="noopener noreferrer" target="_blank" href="https://bridge.harmony.one/">here</a>
         </div>
-        <ExchangeBlock network={bridgeChain} addressMetamask={ETHAccount}/>
+        <ExchangeBlock addressOneWallet={account} network={bridgeChain} addressMetamask={ETHAccount}/>
       </Modal>
     </>
   );

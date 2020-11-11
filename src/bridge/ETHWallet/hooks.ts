@@ -66,11 +66,14 @@ export const useMetaMaskAccount = (connectMetaMask: boolean = false) => {
         //@ts-ignore
         const accounts = await provider.request({method: 'eth_requestAccounts'});
 
-        provider.on('accountsChanged', (accounts) =>
+        provider.on('accountsChanged', (accounts) => {
+          console.log('accountsChanged')
           setAccount(accounts[0])
+          }
         )
 
         provider.on('disconnect', () => {
+          console.log('disconnect')
           setAccount(null)
         })
 

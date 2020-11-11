@@ -14,6 +14,7 @@ const StyledDialogOverlay = styled(AnimatedDialogOverlay)`
     z-index: 2;
     background-color: transparent;
     overflow: hidden;
+    overflow-y: auto;
 
     display: flex;
     align-items: center;
