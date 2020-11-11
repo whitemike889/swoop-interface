@@ -219,7 +219,7 @@ export default function Header() {
         </RowBetween>
       </HeaderFrame>
 
-      <Modal isOpen={showBridge} onDismiss={()=>setShowBridge(false)} width={564}>
+      <Modal isOpen={showBridge} onDismiss={()=>setShowBridge(false)} width={560}>
         <div style={{width: '100%', padding: '15px'}}>
          Harmony Bridge. The stand-alone version is available&nbsp;
           <a style={{outline: 'none', cursor: 'pointer', textDecoration: 'none', color: 'cyan'}} rel="noopener noreferrer" target="_blank" href="https://bridge.harmony.one/">here</a>
