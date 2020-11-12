@@ -4496,26 +4496,26 @@ braces@^3.0.1, braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
-bridge-sdk@^1.0.15:
-  version "1.0.15"
-  resolved "https://registry.yarnpkg.com/bridge-sdk/-/bridge-sdk-1.0.15.tgz#d1a9632dd24fdbb2f5970188f8a994be33625e25"
-  integrity sha512-8rymn9vxpLTtq8Def5TACANkPvxx9vFYsyvoyGG1cWn6I61i0GrDuMS3G0OeWWaQm+cUFp9CN2relQao2Rg56Q==
+bridge-sdk@^1.0.16:
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/bridge-sdk/-/bridge-sdk-1.0.16.tgz#8f44c1fdf125450dfe11d3a95a69074be4e16b03"
+  integrity sha512-gYq8KA6JbJj9llzc1c73lluL/7WIf3xxVzMZVdHw2JsVFHKT0iduTxcRCyR7NbAL14KhCk9CB5eWhPs0hwhVug==
   dependencies:
     "@harmony-js/core" "^0.1.55"
     bignumber.js "^9.0.1"
     superagent "^3.8.3"
     web3 "^1.3.0"
 
-bridge-ui-sdk@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/bridge-ui-sdk/-/bridge-ui-sdk-1.0.9.tgz#9fdeb1406d819450507d4b7376270ec8da8a31a1"
-  integrity sha512-Pnfvnopf3ttArmBAG5M73wluqNHHW98tiEIKIKNDbrf1aNh7KQMPoodEbMMDrav8okiXIKwUR8hQV+LAtk///g==
+bridge-ui-sdk@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/bridge-ui-sdk/-/bridge-ui-sdk-1.0.12.tgz#de734cd213806ad5ea8e03e654062f10e8c0cd24"
+  integrity sha512-ep0X8Tm7qW8VXYy6BNgyiOPEGYo1RObocNCcTlLhx4ZfAErcTh1mQEU9gjj14bfT1APLHqJedJpY+8xAF8sWzQ==
   dependencies:
     "@metamask/detect-provider" "^1.2.0"
     async-validator "^3.4.0"
     bignumber.js "^9.0.1"
     bn.js "^5.1.3"
-    bridge-sdk "^1.0.15"
+    bridge-sdk "^1.0.16"
     classnames "^2.2.6"
     core-decorators "^0.20.0"
     grommet "^2.15.2"

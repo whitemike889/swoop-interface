@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {isMobile} from 'react-device-detect';
 import {Text} from 'rebass';
 
@@ -21,9 +21,11 @@ import Web3Status from '../Web3Status';
 
 import {useActiveHmyReact} from '../../hooks';
 import Modal from '../ModalBridge';
-import {ExchangeBlock} from 'bridge-ui-sdk';
+import {ExchangeBlock,  mainnet as mainnetConfig, testnet as testnetConfig, BridgeSDK} from 'bridge-ui-sdk';
+
 import { useMetaMaskAccount} from '../../bridge/ETHWallet/hooks';
 import 'bridge-ui-sdk/dist/index.css'
+import {useAllTokens} from '../../hooks/Tokens';
 
 const {ChainID} = require('@harmony-js/utils');
 
@@ -171,6 +173,23 @@ export default function Header() {
   const bridgeChain = chainId === 1 ? 'mainnet' : 'testnet'
 
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? ''];
+  const HRC20Tokens = Object.keys(useAllTokens())
+  const [bridgeTokenList, setBridgeTokenList] = useState<any[]>([])
+
+  useEffect(() => {
+    try {
+      const bridgeSdk = new BridgeSDK({ logLevel: 0 })
+      const config = chainId === 1 ? mainnetConfig : testnetConfig
+      bridgeSdk.init(config).then(() => {
+        bridgeSdk.api
+          .getTokensInfo({ page: 0, size: 1000 })
+          .then((res) => setBridgeTokenList(res.content))
+      })
+    } catch (e) {
+    }
+  }, [chainId])
+
+  const customTokens: any[] = bridgeTokenList.filter(({hrc20Address}) =>  HRC20Tokens.includes(hrc20Address))
 
   const [isDark] = useDarkModeManager();
 
@@ -193,13 +212,13 @@ export default function Header() {
               <span onClick={()=>setShowBridge(!showBridge)}>Bridge</span>
             </Link>
             </HeaderElement>
-            <HeaderElement>
+           {/* <HeaderElement>
               <Link>
               <a style={{marginLeft: '10px'}}
                 rel="noopener noreferrer" target="_blank"
                  href="https://tvl.swoop.exchange">Pools</a>
               </Link>
-            </HeaderElement>
+            </HeaderElement>*/}
           </HeaderElement>
           <HeaderControls>
             <HeaderElement>
@@ -232,7 +251,7 @@ export default function Header() {
             <a rel="noopener noreferrer" target="_blank" href="https://bridge.harmony.one/">here</a>
           </Link>
         </div>
-        <ExchangeBlock addressOneWallet={account} network={bridgeChain} addressMetamask={ETHAccount}/>
+        <ExchangeBlock tokens={customTokens} addressOneWallet={account} network={bridgeChain} addressMetamask={ETHAccount}/>
       </Modal>
     </>
   );

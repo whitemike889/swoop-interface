@@ -8,6 +8,7 @@ export const ERC20ABI = [
   },
 ];
 
+// in case we want to display balances for ethereum.
 export const ethereumTokens = {
   'kovan': {
     'ETH': {

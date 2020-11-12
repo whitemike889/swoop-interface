@@ -48,7 +48,6 @@ export const useAllEthereumBalances = (address) => {
   return balances;
 };
 
-// todo disconnect? change state
 export const useMetaMaskAccount = (connectMetaMask: boolean = false) => {
   const [account, setAccount] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
