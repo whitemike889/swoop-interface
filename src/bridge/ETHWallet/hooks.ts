@@ -51,30 +51,37 @@ export const useAllEthereumBalances = (address) => {
 export const useMetaMaskAccount = (connectMetaMask: boolean = false) => {
   const [account, setAccount] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isInit, setIsInit] = useState(false);
+  const provider = window.ethereum;
+
+  useEffect(() => {
+    if (isInit || !provider) {
+      return;
+    }
+    setIsInit(true);
+
+    provider.on('accountsChanged', (accounts) => {
+        console.log('accountsChanged', {accounts});
+        setAccount(accounts[0]);
+      },
+    );
+
+    provider.on('disconnect', () => {
+      console.log('disconnect');
+      setAccount(null);
+    });
+  }, [provider, isInit, setIsInit, setAccount]);
 
   useEffect(() => {
     const connect = async () => {
       if (isLoading) {
-        return
+        return;
       }
-
-      const provider = window.ethereum
 
       setIsLoading(true);
       try {
         //@ts-ignore
         const accounts = await provider.request({method: 'eth_requestAccounts'});
-
-        provider.on('accountsChanged', (accounts) => {
-          console.log('accountsChanged')
-          setAccount(accounts[0])
-          }
-        )
-
-        provider.on('disconnect', () => {
-          console.log('disconnect')
-          setAccount(null)
-        })
 
         setAccount(accounts[0]);
       } catch (e) {
@@ -89,7 +96,7 @@ export const useMetaMaskAccount = (connectMetaMask: boolean = false) => {
     const isConnected = isMetaMaskConnected();
 
     if (!isConnected) {
-      return
+      return;
     }
 
     // @ts-ignore
@@ -105,9 +112,9 @@ export const useMetaMaskAccount = (connectMetaMask: boolean = false) => {
     }
 
     // give it some time to get ready
-    setIsLoading(true)
+    setIsLoading(true);
     setTimeout(() => setIsLoading(false), 1000);
-  }, [isLoading, setIsLoading, account, setAccount, connectMetaMask]);
+  }, [provider, isLoading, setIsLoading, account, setAccount, connectMetaMask]);
 
   return account;
 };

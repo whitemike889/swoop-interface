@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {isMobile} from 'react-device-detect';
 import {Text} from 'rebass';
 
@@ -20,12 +20,11 @@ import Web3Status from '../Web3Status';
 //import VersionSwitch from './VersionSwitch'
 
 import {useActiveHmyReact} from '../../hooks';
-import Modal from '../ModalBridge';
-import {ExchangeBlock,  mainnet as mainnetConfig, testnet as testnetConfig, BridgeSDK} from 'bridge-ui-sdk';
 
-import { useMetaMaskAccount} from '../../bridge/ETHWallet/hooks';
+
+// import { useMetaMaskAccount} from '../../bridge/ETHWallet/hooks';
 import 'bridge-ui-sdk/dist/index.css'
-import {useAllTokens} from '../../hooks/Tokens';
+// import {useAllTokens} from '../../hooks/Tokens';
 
 const {ChainID} = require('@harmony-js/utils');
 
@@ -45,14 +44,14 @@ const HeaderFrame = styled.div`
   `};
 `;
 
-const Link = styled.span`
+/*const Link = styled.span`
   span, a, a:visited {
   text-decoration: none;
   cursor: pointer;
   outline: none;
   ${({theme}) => `color: ${theme.primaryText1}`};
   }
-`
+`*/
 
 const HeaderElement = styled.div`
   display: flex;
@@ -165,31 +164,15 @@ const NETWORK_LABELS: { [chainId in typeof ChainID]: string | null } = {
 
 export default function Header() {
   const {account, chainId} = useActiveHmyReact();
-  const [showBridge, setShowBridge] = useState(false);
-  const ETHAccount = useMetaMaskAccount();
+
+  // const ETHAccount = useMetaMaskAccount();
   //const ETHBalances = useAllEthereumBalances(ETHAccount);
   // console.log({account})
 
-  const bridgeChain = chainId === 1 ? 'mainnet' : 'testnet'
 
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? ''];
-  const HRC20Tokens = Object.keys(useAllTokens())
-  const [bridgeTokenList, setBridgeTokenList] = useState<any[]>([])
 
-  useEffect(() => {
-    try {
-      const bridgeSdk = new BridgeSDK({ logLevel: 0 })
-      const config = chainId === 1 ? mainnetConfig : testnetConfig
-      bridgeSdk.init(config).then(() => {
-        bridgeSdk.api
-          .getTokensInfo({ page: 0, size: 1000 })
-          .then((res) => setBridgeTokenList(res.content))
-      })
-    } catch (e) {
-    }
-  }, [chainId])
 
-  const customTokens: any[] = bridgeTokenList.filter(({hrc20Address}) =>  HRC20Tokens.includes(hrc20Address))
 
   const [isDark] = useDarkModeManager();
 
@@ -207,11 +190,11 @@ export default function Header() {
                      alt="logo" />
               </TitleText>
             </Title>
-            <HeaderElement>
+          {/*  <HeaderElement>
             <Link>
               <span onClick={()=>setShowBridge(!showBridge)}>Bridge</span>
             </Link>
-            </HeaderElement>
+            </HeaderElement>*/}
            {/* <HeaderElement>
               <Link>
               <a style={{marginLeft: '10px'}}
@@ -244,15 +227,6 @@ export default function Header() {
         </RowBetween>
       </HeaderFrame>
 
-      <Modal isOpen={showBridge} onDismiss={()=>setShowBridge(false)} width={560}>
-        <div style={{width: '100%', padding: '15px'}}>
-         Harmony Bridge. The stand-alone version is available&nbsp;
-          <Link>
-            <a rel="noopener noreferrer" target="_blank" href="https://bridge.harmony.one/">here</a>
-          </Link>
-        </div>
-        <ExchangeBlock tokens={customTokens} addressOneWallet={account} network={bridgeChain} addressMetamask={ETHAccount}/>
-      </Modal>
     </>
   );
 }

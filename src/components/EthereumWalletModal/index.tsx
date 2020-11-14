@@ -21,7 +21,7 @@ import { OVERLAY_READY } from '../../connectors/Fortmatic'
 //import { AbstractConnector } from '@web3-react/abstract-connector'
 //import { AbstractWallet } from '@swoop-exchange/utils'
 
-import { useUserWallet } from '../../state/user/hooks'
+// import { useUserWallet } from '../../state/user/hooks'
 
 const CloseIcon = styled.div`
   position: absolute;
@@ -104,7 +104,7 @@ export default function WalletModal({
   // important that these are destructed from the account-specific web3-react context
   const { connector, error } = useWeb3React()
 
-  const [walletView, setWalletView] = useState(WALLET_VIEWS.ACCOUNT)
+  const [, setWalletView] = useState(WALLET_VIEWS.ACCOUNT)
 
   // const [pendingWallet, setPendingWallet] = useState<AbstractWallet | undefined>()
 
@@ -114,7 +114,7 @@ export default function WalletModal({
 
   const [active] = useState<boolean>()
 
-  const [userWallet] = useUserWallet()
+  // const [userWallet] = useUserWallet()
 
   const walletModalOpen = useEthereumWalletModalOpen()
   const toggleWalletModal = useEthereumWalletModalToggle()
@@ -173,7 +173,7 @@ export default function WalletModal({
         </UpperSection>
       )
     }
-    if (userWallet && userWallet.address && walletView === WALLET_VIEWS.ACCOUNT) {
+
       return (
         <AccountDetails
           toggleWalletModal={toggleWalletModal}
@@ -183,9 +183,7 @@ export default function WalletModal({
           openOptions={() => setWalletView(WALLET_VIEWS.OPTIONS)}
         />
       )
-    }
 
-    return null
   }
 
   return (
