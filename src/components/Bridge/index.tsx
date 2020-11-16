@@ -8,6 +8,10 @@ import {useAllTokens} from '../../hooks/Tokens';
 import {mainnet as mainnetConfig} from 'bridge-sdk/lib/configs/mainnet';
 import {testnet as testnetConfig} from 'bridge-sdk/lib/configs/testnet';
 import styled from 'styled-components';
+import {
+  toBech32,
+} from '@harmony-js/crypto'
+
 
 const Link = styled.span`
   span, a, a:visited {
@@ -21,6 +25,9 @@ const Link = styled.span`
 
 const Bridge = () => {
   const {account, chainId} = useActiveHmyReact();
+
+  const bech32Address = account ? toBech32(account) : ''
+
   const [showBridge, setShowBridge] = useState(false);
   const ETHAccount = useMetaMaskAccount();
   //const ETHBalances = useAllEthereumBalances(ETHAccount);
@@ -57,7 +64,7 @@ const Bridge = () => {
             <a rel="noopener noreferrer" target="_blank" href="https://bridge.harmony.one/">here</a>
           </Link>
         </div>
-        <ExchangeBlock tokens={customTokens} addressOneWallet={account} network={bridgeChain}
+        <ExchangeBlock tokens={customTokens} addressOneWallet={bech32Address} network={bridgeChain}
                        addressMetamask={ETHAccount} />
       </Modal>
     </>
