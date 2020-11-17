@@ -39,8 +39,6 @@ const Bridge = () => {
   const HRC20Tokens = Object.keys(useAllTokens());
   const [bridgeTokenList, setBridgeTokenList] = useState<any[]>([]);
 
-  console.log({HRC20Tokens: JSON.stringify(HRC20Tokens),chainId })
-
   useEffect(() => {
     try {
       const bridgeSdk = new BridgeSDK({logLevel: 0});
