@@ -100,7 +100,13 @@ export const useMetaMaskAccount = (connectMetaMask: boolean = false) => {
     }
 
     // @ts-ignore
-    if (window.web3 && window.web3.eth.accounts.length > 0) {
+    if (window.web3
+      // @ts-ignore
+      && window.web3.eth
+      // @ts-ignore
+      && window.web3.eth.accounts
+      // @ts-ignore
+      && window.web3.eth.accounts.length > 0) {
       // @ts-ignore
       setAccount(window.web3.eth.accounts[0]);
       return;
