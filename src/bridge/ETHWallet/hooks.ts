@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {getAllEthereumBalances, isMetaMaskConnected} from './web3';
+import {getAllEthereumBalances, isMetaMaskConnected, web3} from './web3';
 import {useAllTokens} from '../../hooks/Tokens';
 import {TokenAmount} from '@swoop-exchange/sdk';
 
@@ -100,15 +100,15 @@ export const useMetaMaskAccount = (connectMetaMask: boolean = false) => {
     }
 
     // @ts-ignore
-    if (window.web3
+    if (web3
       // @ts-ignore
-      && window.web3.eth
+      && web3.eth
       // @ts-ignore
-      && window.web3.eth.accounts
+      && web3.eth.accounts
       // @ts-ignore
-      && window.web3.eth.accounts.length > 0) {
+      && web3.eth.accounts.length > 0) {
       // @ts-ignore
-      setAccount(window.web3.eth.accounts[0]);
+      setAccount(web3.eth.accounts[0]);
       return;
     }
 
