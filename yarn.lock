@@ -1703,6 +1703,18 @@
     "@harmony-js/transaction" "0.1.56"
     "@harmony-js/utils" "0.1.56"
 
+"@harmony-js/account@0.1.57":
+  version "0.1.57"
+  resolved "https://registry.yarnpkg.com/@harmony-js/account/-/account-0.1.57.tgz#d6e1e4955658ab25e89f512e12d9d9ecd28c738d"
+  integrity sha512-2Q0aX49m9IDDf9AvQHEgnxVBfvQ4wnXJqMo1y3g+9VuoyibNLFy/7GRwywwjrKTtfERXegTGHdZYo/CCO0PrpQ==
+  dependencies:
+    "@harmony-js/core" "0.1.57"
+    "@harmony-js/crypto" "0.1.56"
+    "@harmony-js/network" "0.1.56"
+    "@harmony-js/staking" "0.1.56"
+    "@harmony-js/transaction" "0.1.56"
+    "@harmony-js/utils" "0.1.56"
+
 "@harmony-js/contract@0.1.56":
   version "0.1.56"
   resolved "https://registry.yarnpkg.com/@harmony-js/contract/-/contract-0.1.56.tgz#cfe8ffca6332008137f248d5bce59c4f3c5f22f3"
@@ -1714,12 +1726,25 @@
     "@harmony-js/transaction" "0.1.56"
     "@harmony-js/utils" "0.1.56"
 
-"@harmony-js/core@0.1.56", "@harmony-js/core@^0.1.55":
+"@harmony-js/core@0.1.56":
   version "0.1.56"
   resolved "https://registry.yarnpkg.com/@harmony-js/core/-/core-0.1.56.tgz#52c986c0ecfa881b57aaeb0448ae92d2d30c3f18"
   integrity sha512-mYVIewX2oL0PHZJU64HD65M/QMA756d19MosATRqbfj8MLLgdMdTuXHF525NWDRxBiYlSh6BGSNJakNbtq8g3Q==
   dependencies:
     "@harmony-js/account" "0.1.56"
+    "@harmony-js/contract" "0.1.56"
+    "@harmony-js/crypto" "0.1.56"
+    "@harmony-js/network" "0.1.56"
+    "@harmony-js/staking" "0.1.56"
+    "@harmony-js/transaction" "0.1.56"
+    "@harmony-js/utils" "0.1.56"
+
+"@harmony-js/core@0.1.57", "@harmony-js/core@^0.1.55", "@harmony-js/core@^0.1.57":
+  version "0.1.57"
+  resolved "https://registry.yarnpkg.com/@harmony-js/core/-/core-0.1.57.tgz#bf10eb017f0086868fa8aefab097894e7b36acb3"
+  integrity sha512-4d48MoR/3xabsoiV0fXjVwtL4u9AeNO72+UZWSZl2ZzrPvij2ucn14wvIZwCL69xJwD4bsqgy68Ju+DRLFVW3A==
+  dependencies:
+    "@harmony-js/account" "0.1.57"
     "@harmony-js/contract" "0.1.56"
     "@harmony-js/crypto" "0.1.56"
     "@harmony-js/network" "0.1.56"
@@ -2341,10 +2366,10 @@
   resolved "https://registry.yarnpkg.com/@swoop-exchange/periphery/-/periphery-1.0.1.tgz#0c05c12f6e402d5a6145e254d303f175d0bb23fa"
   integrity sha512-KqREmAuZALEn5PP4mBcnIchVtoiALxExx1wADhcD+Tb1sWp5kop6yzP8+f9t+YIrC8sj8Ey6+PqiRb5MViYwKQ==
 
-"@swoop-exchange/sdk@=1.2.4":
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/@swoop-exchange/sdk/-/sdk-1.2.4.tgz#33d871583381d359ad01603143d626b21f2ae957"
-  integrity sha512-0V8vlP3odXtYxwIF/tY9hQjPuq9win2gDmNkao2fY7KFgDw8tXxYLnoAHbqPfpf9sQFpGAHPZqxSPUH3lF2sQA==
+"@swoop-exchange/sdk@=1.2.7":
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/@swoop-exchange/sdk/-/sdk-1.2.7.tgz#1f3762e8b6d7bb07ce26cf7bafdd021dd7a11e00"
+  integrity sha512-XtG2jFSmYWjkfXYWC24ZIm5CMZKCQt/FeSLKWLe6qiXIs8xn+aC8KOqr+uZUufOMzxRLPDOQCVIVnlrUywHn+w==
   dependencies:
     "@harmony-js/core" "^0.1.55"
     "@swoop-exchange/core" "^1.0.3"
@@ -2355,10 +2380,10 @@
     tiny-warning "^1.0.3"
     toformat "^2.0.0"
 
-"@swoop-exchange/utils@=1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@swoop-exchange/utils/-/utils-1.0.1.tgz#89a090f91003e43f16fdc6f9f1e0ec6cd0cb6c74"
-  integrity sha512-o6MTPq9aU0N+sVuIjgVuVyCDsoUCmPc3t1d8yA8BoOnazprQ5OEACU+AEST3t7+p6ryFN74MwPnfW//oHL9gOQ==
+"@swoop-exchange/utils@=1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@swoop-exchange/utils/-/utils-1.0.2.tgz#acd83a268f3da1dd3789a4c35a834c7404f5ad68"
+  integrity sha512-0H/pD5I+FZB27zFF8qUPT4wsQMwTy6VsZ1D3uo/Q+eMXdquIUTjakCGspOW+iNcyX4JFbugCzYyeYKP/7z1nWQ==
 
 "@szmarczak/http-timer@^1.1.2":
   version "1.1.2"
@@ -6484,9 +6509,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.3.378, electron-to-chromium@^1.3.47, electron-to-chromium@^1.3.649:
-  version "1.3.660"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.660.tgz#bfa8ce23735391cbd1c75c38f483e3179d0e0370"
-  integrity sha512-UOSKNfUBY8FDOSo4mfaUsN3KftlNLcYOg9v5apqLvNcWj+Ogy/i9SEDMZpfSVOeDkOcpu9iusucX6jxTWzqGLA==
+  version "1.3.661"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.661.tgz#8603ec971b3e3b3d83389ac2bb64b9b07d7bb40a"
+  integrity sha512-INNzKoL9ceOpPCpF5J+Fp9AOHY1RegwKViohAyTzV3XbkuRUx04r4v8edsDbevsog8UuL0GvD/Qerr2HwVTlSA==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -13417,9 +13442,9 @@ react-redux@^7.2.0:
     react-is "^16.13.1"
 
 react-remove-scroll-bar@^2.1.0:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/react-remove-scroll-bar/-/react-remove-scroll-bar-2.1.1.tgz#5876428dfd546f2f63a4d277aea2197925505c1e"
-  integrity sha512-IZbfQPSozIr8ylHE9MFcQeb2TTzj4abfE7OBXjmtUeXQ5h6ColGKDNo5h7OmzrJRilAx3YIKBf3jb0yrb31BJQ==
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-remove-scroll-bar/-/react-remove-scroll-bar-2.2.0.tgz#d4d545a7df024f75d67e151499a6ab5ac97c8cdd"
+  integrity sha512-UU9ZBP1wdMR8qoUs7owiVcpaPwsQxUDC2lypP6mmixaGlARZa7ZIBx1jcuObLdhMOvCsnZcvetOho0wzPa9PYg==
   dependencies:
     react-style-singleton "^2.1.0"
     tslib "^1.0.0"
