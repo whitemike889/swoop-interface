@@ -2380,10 +2380,10 @@
     tiny-warning "^1.0.3"
     toformat "^2.0.0"
 
-"@swoop-exchange/utils@=1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@swoop-exchange/utils/-/utils-1.0.2.tgz#acd83a268f3da1dd3789a4c35a834c7404f5ad68"
-  integrity sha512-0H/pD5I+FZB27zFF8qUPT4wsQMwTy6VsZ1D3uo/Q+eMXdquIUTjakCGspOW+iNcyX4JFbugCzYyeYKP/7z1nWQ==
+"@swoop-exchange/utils@=1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@swoop-exchange/utils/-/utils-1.0.3.tgz#645efcabf5af320709cf2682bddf34a3ce42f7dd"
+  integrity sha512-s9wiLve8+drlDKrDhk9T8H35EKQ9XI5LX4YXzLdeaTcavq2jMR7kWbnkTF/setnWAOrva4WG+SUTHX/e0hIdQQ==
 
 "@szmarczak/http-timer@^1.1.2":
   version "1.1.2"
