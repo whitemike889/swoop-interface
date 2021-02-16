@@ -178,7 +178,16 @@ const tokens = [
     "name": "Wrapped ONE",
     "decimals": 18,
     "logoURI": "https://swoop-exchange.s3-us-west-1.amazonaws.com/tokens/WONE.png"
-  }]
+  },
+  {
+    "chainId": 1,
+    "address": "0x6983D1E6DEf3690C4d616b13597A09e6193EA013",
+    "symbol": "1ETH",
+    "name": "Ether",
+    "decimals": 18,
+    "logoURI": "https://swoop-exchange.s3-us-west-1.amazonaws.com/tokens/1ETH.png"
+  },
+  ]
 
 
 export default function Earn() {
@@ -186,8 +195,11 @@ export default function Earn() {
 
   const AllTokens = tokens.map(t => new Token(1, t.address, t.decimals, t.symbol, t.name))//useAllTokens();
 
-  const widgetPairs = [['WONE', 'BUSD'], ['LINK', '1WETH'], ['1WBTC', '1WETH']];
+  // const widgetPairs = [['WONE', '1ETH'], ['WONE', 'BUSD'], ['LINK', '1WETH'], ['1WBTC', '1WETH']];
+  const widgetPairs = [['WONE', '1ETH'], ['WONE', 'BUSD']];
   // const widgetPairs = [['WONE', '1BUSD'], ['1LINK', '1ETH'], ['WBTC', '1ETH']];
+
+  console.log({AllTokens})
 
   const getTokenBySymbol = (symbol) => {
     return Object.values(AllTokens).find(t => t.symbol === symbol);
