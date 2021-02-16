@@ -199,8 +199,6 @@ export default function Earn() {
   const widgetPairs = [['WONE', '1ETH'], ['WONE', 'BUSD']];
   // const widgetPairs = [['WONE', '1BUSD'], ['1LINK', '1ETH'], ['WBTC', '1ETH']];
 
-  console.log({AllTokens})
-
   const getTokenBySymbol = (symbol) => {
     return Object.values(AllTokens).find(t => t.symbol === symbol);
   };
