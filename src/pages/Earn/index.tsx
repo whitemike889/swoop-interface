@@ -196,7 +196,7 @@ export default function Earn() {
   const AllTokens = tokens.map(t => new Token(1, t.address, t.decimals, t.symbol, t.name))//useAllTokens();
 
   // const widgetPairs = [['WONE', '1ETH'], ['WONE', 'BUSD'], ['LINK', '1WETH'], ['1WBTC', '1WETH']];
-  const widgetPairs = [['WONE', '1ETH'], ['WONE', 'BUSD']];
+  const widgetPairs = [[ '1ETH', 'WONE'], ['WONE', 'BUSD']];
   // const widgetPairs = [['WONE', '1BUSD'], ['1LINK', '1ETH'], ['WBTC', '1ETH']];
 
   const getTokenBySymbol = (symbol) => {
